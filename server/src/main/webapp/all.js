@@ -109,5 +109,5 @@ function afficheListUsers(data) {
 }
 
 function CacheConnInscr() {
-	$(".row").hide();
+	$(".col-md-6").hide();
 }
