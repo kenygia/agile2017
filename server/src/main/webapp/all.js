@@ -1,3 +1,18 @@
+	$(document).ready(function() {
+				$("#get-ram").click(function () {getUser($('#user').val(), $('#alias').val())});
+				$("#post-ram").click(function () {postUser($('#user').val(), $('#alias').val())});
+				$("#list-ram").click(function () {listUsers()});
+				$("#get-bdd").click(function () {getUserBdd($('#userdb').val(), $('#aliasdb').val())});
+				$("#post-bdd").click(function () {postUserBdd(
+				    $('#userdb').val(),
+				    $('#aliasdb').val(),
+				    $('#emaildb').val(),
+				    $('#passwddb').val())});
+				$("#list-bdd").click(function () {listUsersBdd()});
+				$("#read-forall").click(function () {getForAll()});
+				$("#read-byannotation").click(function () {getByAnnotation()});
+			});
+
 function getUserBdd(name) {
 	getUserGeneric(name, "v1/user/");
 }
