@@ -37,7 +37,7 @@ public class UserResource {
         dto.setId(id);
         return dto;
     }
-
+    
     @GET
     @Path("/{name}")
     public UserDto getUser(@PathParam("name") String name) {
@@ -47,15 +47,25 @@ public class UserResource {
         }
         return user.convertToDto();
     }
-
+/*
     @GET
-    public List<UserDto> getAllUsers(@QueryParam("q") String query) {
+    @Path("/{id}")
+    public UserDto getUser(@PathParam("id") int id) {
+        User user = dao.findById(id);
+        if (user == null) {
+            throw new WebApplicationException(404);
+        }
+        return user.convertToDto();
+    }
+*/
+    @GET
+    public List<UserDto> getAllUsers(@QueryParam("q") String id) {
         List<User> users;
-        if (query == null) {
+        if (id == null) {
             users = dao.all();
         } else {
-            logger.debug("Search users with query: " + query);
-            users = dao.search("%" + query + "%");
+            logger.debug("Search users with query: " + id);
+            users = dao.search("%" + id + "%");
         }
         return users.stream().map(User::convertToDto).collect(Collectors.toList());
     }
