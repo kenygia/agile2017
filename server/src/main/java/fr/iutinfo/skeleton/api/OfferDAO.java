@@ -27,6 +27,9 @@ public interface OfferDAO {
 
 	@SqlUpdate("delete from offers where id = :id")
 	void delete(@Bind("id") int id);
+	
+	@SqlUpdate("delete from offers")
+	void deleteAll();
 
 	@SqlQuery("select * from offers order by id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
@@ -35,6 +38,10 @@ public interface OfferDAO {
 	@SqlQuery("select * from offers where id = :id")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Offer findById(@Bind("id") int id);
+
+	@SqlQuery("select * from offers where id_user = :id_user")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	List<Offer> allFromUser(@Bind("id_user") int id_user);
 
 	void close();
 }
