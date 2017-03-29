@@ -106,3 +106,7 @@ function afficheListUsers(data) {
 	html = html + "</ul>";
 	$("#reponse").html(html);
 }
+
+function CacheConnInscr() {
+	$(".row").hide();
+}
