@@ -28,6 +28,10 @@ public interface UserDao {
     
     @SqlUpdate("delete from users where id = :id")
     void delete(@Bind("id") int id);
+    
+    @SqlUpdate("delete from users")
+    void deleteAll();
+    
 
     @SqlQuery("select * from users order by id")
     @RegisterMapperFactory(BeanMapperFactory.class)
