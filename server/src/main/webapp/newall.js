@@ -14,7 +14,7 @@ $(document).ready(function() {
 				$("#post-bdd2").click(function (){
 					//alert($('#user').val());
 					CacheConnInscr()
-					getUserBdd("Olivier")
+					getUserBdd($('#userlogin').val())
 							});
 				$("#list-bdd").click(function () {listUsersBdd()});
 				$("#read-forall").click(function () {getForAll()});
@@ -103,7 +103,7 @@ function listUsersGeneric(url) {
 function afficheUser(data) {
 	console.log(data);
 	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
-	alert(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
+	alert(data.id +""+ data.alias +""+ data.name+"");
 }
 
 function afficheListUsers(data) {
