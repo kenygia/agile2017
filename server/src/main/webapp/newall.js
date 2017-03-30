@@ -18,6 +18,7 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
+		alert("mon token : " + token);
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -32,7 +33,24 @@ function getUserBdd(name) {
 function getUserGeneric(name, url) {
 	$.getJSON(url + name, function(data) {
 		afficheUser(data);
+		$.cookie(data.name, data.id)
 	});
+}
+
+function cookie(name, id) {
+	let header = {
+			"alg": "HS256",
+			"typ": "JWT"
+	};
+	let stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+	let encodedHeader = base64url(stringifiedHeader);
+	let tokenen = {
+			"id": id,
+			"username": name
+	};
+	let stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(tokenen));
+	let encodedData = base64url(stringifiedData);
+	tokenen = encodedHeader + "." + encodedData;
 }
 
 
@@ -173,21 +191,31 @@ function getAllOffres(data)
 {
 	for(var i=0;i<data.length;i++)
 	{
-		//console.log(data[i]);
 		addOffreVisual(data[i])
 	}
 }
 function addOffreVisual(json)
 {
-	/*	
-	document.getElementById("titreproduit").innerHTML=json.titre;
+/*	document.getElementById("titreproduit").innerHTML=json.titre;
 	document.getElementById("descriptionproduit").innerHTML=json.detail;
 	*/
 	var unfiche = "";
 
-	unfiche += '<div class="col-sm-4 le_titre" style="font-size: large">' + json.titre + '</div>'
-	unfiche += '<div class="col-md-8 le_debut_text">' + json.detail + '</div>'
-	document.querySelector(".atoi-item").innerHTML(unfiche);
+	
+	//unfiche += json.titre + "\n"
+	/*unfiche += '<div class="col-sm-4 le_titre" style="font-size: large">' + json.titre + '</div>'
+	unfiche += '<div class="col-md-8 le_debut_text">' + json.detail + '</div>'*/
+	unfiche += '	<div class="col-sm-8" style="background-color: lavenderblush;">'
+	unfiche += '		<div class="form-group">'
+	unfiche += '			<label for="inputsm">'+json.titre+'</label> <input'
+	unfiche += '				class="form-control input-sm" id="inputsm" type="text">'
+	unfiche += '		</div>'
+	unfiche += '		<div class="form-group">'
+	unfiche += '			<label for="exampleTextarea">'+json.detail+'</label>'
+	unfiche += '			<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>'
+	unfiche += '		</div>'
+	unfiche += '	</div>'
+	document.querySelector(".amoi-item").innerHTML+=unfiche;
 	
 }
 
