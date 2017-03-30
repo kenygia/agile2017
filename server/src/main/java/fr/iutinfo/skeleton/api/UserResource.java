@@ -37,7 +37,7 @@ public class UserResource {
         dto.setId(id);
         return dto;
     }
-
+    
     @GET
     @Path("/{name}")
     public UserDto getUser(@PathParam("name") String name) {
@@ -47,7 +47,7 @@ public class UserResource {
         }
         return user.convertToDto();
     }
-
+    
     @GET
     public List<UserDto> getAllUsers(@QueryParam("q") String query) {
         List<User> users;
@@ -59,7 +59,7 @@ public class UserResource {
         }
         return users.stream().map(User::convertToDto).collect(Collectors.toList());
     }
-
+    
     @DELETE
     @Path("/{id}")
     public void deleteUser(@PathParam("id") int id) {

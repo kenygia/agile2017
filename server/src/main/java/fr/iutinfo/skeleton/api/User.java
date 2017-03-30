@@ -17,6 +17,7 @@ public class User implements Principal {
     private String alias;
     private int id = 0;
     private String email;
+    private String phone;
     private String password;
     private String passwdHash;
     private String salt;
@@ -47,6 +48,14 @@ public class User implements Principal {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
     public int getId() {
         return id;
@@ -105,7 +114,7 @@ public class User implements Principal {
 
     @Override
     public String toString() {
-        return id + ": " + alias + ", " + name + " <" + email + ">";
+        return id + ": " + alias + ", " + name + " <" + email + ">" + " <" + phone + ">";
     }
 
     public String getAlias() {
@@ -157,9 +166,11 @@ public class User implements Principal {
         this.search = search;
     }
 
+
     public void initFromDto(UserDto dto) {
         this.setAlias(dto.getAlias());
         this.setEmail(dto.getEmail());
+        this.setPhone(dto.getPhone());
         this.setId(dto.getId());
         this.setName(dto.getName());
         this.setPassword(dto.getPassword());
@@ -169,6 +180,7 @@ public class User implements Principal {
         UserDto dto = new UserDto();
         dto.setAlias(this.getAlias());
         dto.setEmail(this.getEmail());
+        dto.setPhone(this.getPhone());
         dto.setId(this.getId());
         dto.setName(this.getName());
         dto.setPassword(this.getPassword());

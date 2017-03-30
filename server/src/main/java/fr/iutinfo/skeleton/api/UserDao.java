@@ -7,26 +7,31 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import java.util.List;
 
 public interface UserDao {
-    @SqlUpdate("create table users (id integer primary key autoincrement, name varchar(100), alias varchar(100), email varchar(100), passwdHash varchar(64), salt varchar(64), search varchar(1024))")
+    @SqlUpdate("create table users (id integer primary key autoincrement, name varchar(100), alias varchar(100), email varchar(100), phone varchar(10), passwdHash varchar(64), salt varchar(64), search varchar(1024))")
     void createUserTable();
 
-    @SqlUpdate("insert into users (name,alias,email, passwdHash, salt, search) values (:name, :alias, :email, :passwdHash, :salt, :search)")
+    @SqlUpdate("insert into users (name, alias, email, phone, passwdHash, salt, search) values (:name, :alias, :email, :phone, :passwdHash, :salt, :search)")
     @GetGeneratedKeys
     int insert(@BindBean() User user);
 
-    @SqlQuery("select * from users where name = :name")
-    @RegisterMapperFactory(BeanMapperFactory.class)
-    User findByName(@Bind("name") String name);
+    @SqlUpdate("drop table if exists users")
+    void dropUserTable();
 
     @SqlQuery("select * from users where search like :name")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<User> search(@Bind("name") String name);
 
-    @SqlUpdate("drop table if exists users")
-    void dropUserTable();
 
+    @SqlQuery("select * from users where name = :name")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    User findByName(@Bind("name") String name);
+    
     @SqlUpdate("delete from users where id = :id")
     void delete(@Bind("id") int id);
+    
+    @SqlUpdate("delete from users")
+    void deleteAll();
+    
 
     @SqlQuery("select * from users order by id")
     @RegisterMapperFactory(BeanMapperFactory.class)

@@ -11,6 +11,7 @@ public class UserDto implements Principal {
     private String alias;
     private int id = 0;
     private String email;
+    private String phone;
     private String password;
 
     public String getEmail() {
@@ -21,7 +22,15 @@ public class UserDto implements Principal {
         this.email = email;
     }
 
-    public int getId() {
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getId() {
         return id;
     }
 
