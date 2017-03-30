@@ -126,3 +126,27 @@ function EnvoiPageUtilisateur(){
 	$(".ficheutilisateur").show()
 	
 }
+
+function getOffres(url)
+{
+	 $.ajax
+	 ({
+	   type: "GET",
+	   url: url,
+	   dataType: 'json',
+	   success: function (data) {
+		   afficherAllOffres(data);
+	   },
+	   error : function(jqXHR, textStatus, errorThrown) {
+	   			alert('error: ' + textStatus);
+	       		}
+     });
+}
+
+function afficherAllOffres(data)
+{
+	for(var i=0;i<data.length;i++)
+	{
+		console.log(data[i]);
+	}
+}
