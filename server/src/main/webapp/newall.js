@@ -14,6 +14,7 @@ $(document).ready(function() {
 				$("#post-bdd2").click(function (){
 						CacheConnInscr()
 						getUserBdd($('#userlogin').val())
+						EnvoiPageUtilisateur()
 							});
 				$("#list-bdd").click(function () {listUsersBdd()});
 				$("#read-forall").click(function () {getForAll()});
@@ -122,6 +123,6 @@ function CacheConnInscr() {
 
 
 function EnvoiPageUtilisateur(){
-	$(".container-fluid ficheutilisateur").show()
+	$(".ficheutilisateur").show()
 	
 }
