@@ -1,5 +1,4 @@
 $(document).ready(function() {	
-		postUserGeneric("coco", "coco@coco", "123", "/v1/user/");
 				$("#get-ram").click(function () {getUser($('#user').val())});
 				$("#post-ram").click(function () {postUser($('#user').val())});
 				$("#list-ram").click(function () {listUsers()});
@@ -104,7 +103,7 @@ function afficheUser(data) {
 	console.log(data);
 	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
 	//alert(data.id +""+ data.alias +""+ data.name+"");
-	$("#nom-connecte").html("" + data.alias);
+	$(".nom-connecte").html("vous êtes connecté : " + data.alias);
 }
 
 function afficheListUsers(data) {
