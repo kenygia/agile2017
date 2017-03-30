@@ -103,7 +103,8 @@ function listUsersGeneric(url) {
 function afficheUser(data) {
 	console.log(data);
 	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
-	alert(data.id +""+ data.alias +""+ data.name+"");
+	//alert(data.id +""+ data.alias +""+ data.name+"");
+	$("#nom-connecte").html("" + data.alias);
 }
 
 function afficheListUsers(data) {
