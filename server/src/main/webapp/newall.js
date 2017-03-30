@@ -15,6 +15,7 @@ $(document).ready(function() {
 						CacheConnInscr()
 						getUserBdd($('#userlogin').val())
 						EnvoiPageUtilisateur()
+						getOffres()
 							});
 				$("#list-bdd").click(function () {listUsersBdd()});
 				$("#read-forall").click(function () {getForAll()});
@@ -129,15 +130,16 @@ function EnvoiPageUtilisateur(){
 }
 
 
-function getOffres(url)
+function getOffres()
 {
+	var url = "v1/offer";
 	 $.ajax
 	 ({
 	   type: "GET",
 	   url: url,
 	   dataType: 'json',
 	   success: function (data) {
-		   afficherAllOffres(data);
+		   getAllOffres(data);
 	   },
 	   error : function(jqXHR, textStatus, errorThrown) {
 	   			alert('error: ' + textStatus);
@@ -145,17 +147,56 @@ function getOffres(url)
      });
 }
 
-function afficherAllOffres(data)
+
+function getOffre(id)
+{
+	var url = "v1/offer/"+id;
+	 $.ajax
+	 ({
+	   type: "GET",
+	   url: url,
+	   dataType: 'json',
+	   success: function (data) {
+		   getAllOffres(data);
+	   },
+	   error : function(jqXHR, textStatus, errorThrown) {
+	   			alert('error: ' + textStatus);
+	       		}
+     });
+}
+
+function getAllOffres(data)
 {
 	for(var i=0;i<data.length;i++)
 	{
-		/*if(data[i].id_user == 0)
-		{
-		
-		}*/
-		console.log(data[i]);
+		//console.log(data[i]);
+		addOffreVisual(data[i])
 	}
+}
+function addOffreVisual(json)
+{
+/*	document.getElementById("titreproduit").innerHTML=json.titre;
+	document.getElementById("descriptionproduit").innerHTML=json.detail;
+	*/
+	var unfiche = "";
 
+	/*unfiche += '	<div class="col-sm-8" style="background-color: lavenderblush;">'
+	unfiche += '		<div class="form-group">'
+	unfiche += '			<label for="inputsm">'+json.titre+'</label> <input'
+	unfiche += '				class="form-control input-sm" id="inputsm" type="text">'
+	unfiche += '		</div>'
+	unfiche += '		<div class="form-group">'
+	unfiche += '			<label for="exampleTextarea">'+json.detail+'</label>'
+	unfiche += '			<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>'
+	unfiche += '		</div>'
+	unfiche += '	</div>'*/
+	//unfiche += json.titre + "\n"
+	unfiche += '	<div class="col-sm-8" style="background-color: lavenderblush;">'
+	unfiche += '<p>' + json.titre + '</p>'
+	unfiche += '</div>'
+	document.querySelector(".atoi-item").innerHTML+=unfiche;
+	
+}
 $(function(){
     $('#submitlier').click(upload);
 });
