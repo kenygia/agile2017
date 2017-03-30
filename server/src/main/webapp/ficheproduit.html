@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title>Fiche de votre produit</title>
+<title>Peanuts</title>
 <meta charset='utf-8'>
 <!-- jQuery -->
 <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -13,17 +13,30 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<!-- Code local 
-    <script src="all.js"></script>-->
+
+<!-- Code local -->
+
 </head>
 <body>
+<!-- page-header toujours affiché -->
+	
+	<div class="page-header" style="max-height: 200px; text-align: center;">
+		<h1>Peanuts</h1>
+		<p>La plateforme d'échange et de troc parfaite pour vous !</p>
+	</div>
+	
+	
+	
+	
+	<div class="nom-connecte">
+		<p></p>
+	</div>
 	<div class="container-fluid">
 		<div class="jumbotron jumbotron-fluid">
-			<h1>Votre Produit</h1>
-			<p>Votre produit est le meilleur produit du monde, tout le monde
-				voudra vous l'échanger !</p>
-			<div class="row" style="min-height: 400px">
-				<div class="col-sm-4" style="background-color: lavender; min-height: 400px">
+			<h2>Votre Produit</h1>
+			<p>Ici vous pouvez créer et publier une annonce</p>
+			<div class="row">
+				<div class="col-sm-4" style="background-color: lavender;">
 					<div class="form-group">
 						<label for="exampleInputFile">Postez une image</label> <input
 							type="file" class="form-control-file" id="exampleInputFile"
@@ -32,7 +45,8 @@
 						une belle image plus de monde verra votre annonce</medium>
 					</div>
 				</div>
-				<div class="col-sm-8" style="background-color: lavenderblush; min-height: 400px">
+
+				<div class="col-sm-8" style="background-color: lavenderblush;">
 					<div class="form-group">
 						<label for="inputsm">Donnez un titre à votre annonce</label> <input
 							class="form-control input-sm" id="inputsm" type="text">
@@ -44,9 +58,13 @@
 				</div>
 
 			</div>
+			<div class="btn-group" role="group" style="position:relative; left:95%;">
+					<button type="button" id="submitlier" class="btn btn-primary" >Publier</button>
+				
+			</div>
 		</div>
 	</div>
 	</div>
-
+<script src="newall.js"></script>
 </body>
 </html>
