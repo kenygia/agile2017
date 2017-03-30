@@ -28,6 +28,7 @@ function getUserBdd(name) {
 function getUserGeneric(name, url) {
 	$.getJSON(url + name, function(data) {
 		afficheUser(data);
+		$.cookie(data.name, data.id)
 	});
 }
 
@@ -147,6 +148,10 @@ function afficherAllOffres(data)
 {
 	for(var i=0;i<data.length;i++)
 	{
+		/*if(data[i].id_user == 0)
+		{
+		
+		}*/
 		console.log(data[i]);
 	}
 }
