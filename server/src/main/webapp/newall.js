@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 $(document).ready(function() {
-=======
-$(document).ready(function() {	
->>>>>>> 32232d5d6b7f30a2cf3087bcf75bfe30e01991f9
 				$("#get-ram").click(function () {getUser($('#user').val())});
 				$("#post-ram").click(function () {postUser($('#user').val())});
 				$("#list-ram").click(function () {listUsers()});
