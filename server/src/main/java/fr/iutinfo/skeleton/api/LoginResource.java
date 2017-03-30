@@ -2,6 +2,7 @@ package fr.iutinfo.skeleton.api;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
@@ -14,9 +15,17 @@ import javax.ws.rs.core.SecurityContext;
 @Consumes(MediaType.APPLICATION_JSON)
 public class LoginResource {
     @GET
-    public User secureWhoAmI(@Context SecurityContext context) {
+    public User getWhoAmI(@Context SecurityContext context) {
         User u = (User) context.getUserPrincipal();
-
+        if (u.isAnonymous()) {
+            throw new WebApplicationException(401);
+        }
+        return u;
+    }
+    
+    @POST
+    public User postWhoAmI(@Context SecurityContext context) {
+        User u = (User) context.getUserPrincipal();
         if (u.isAnonymous()) {
             throw new WebApplicationException(401);
         }
