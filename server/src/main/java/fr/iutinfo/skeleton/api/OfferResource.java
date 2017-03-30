@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.iutinfo.skeleton.common.dto.OfferDto;
 import fr.iutinfo.skeleton.common.dto.UserDto;
+// TODO : active  
 
 @Path("/offer")
 @Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +68,7 @@ public class OfferResource {
 		List<Offer> offers;
         User u = (User) context.getUserPrincipal();
 		if (u.isAnonymous()) {
-			logger.debug("get all offers");
+			logger.debug("get all user offers");
 			offers = dao.all();
 		} else {
 			logger.debug("Search offers with query: " + u.getId());
@@ -78,16 +79,11 @@ public class OfferResource {
 	}
 	
 	@GET
+	@Path("/all")
 	public List<OfferDto> getAllOffers(@QueryParam("id_user") String id_user) {
 		List<Offer> offers;
-		if (id_user == null) {
-			logger.debug("get all offers");
-			offers = dao.all();
-		} else {
-			logger.debug("Search offers with query: " + id_user);
-			
-			offers = dao.allFromUser(Integer.parseInt(id_user));
-		}
+		logger.debug("get all offers");
+		offers = dao.all();
 		return offers.stream().map(Offer::convertToDto).collect(Collectors.toList());
 	}
 
