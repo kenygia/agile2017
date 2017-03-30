@@ -7,7 +7,9 @@
 				    $('#userdb').val(),
 				    $('#emaildb').val(),
 				    $('#passwddb').val())
-				    CacheConnInscr()
+				    alert( $('#userdb').val()+ ""+
+				    $('#emaildb').val()+""+
+				    $('#passwddb').val())
 				    EnvoiPageUtilisateur()});
 				$("#post-bdd2").click(function (){
 					//alert($('#user').val());
@@ -132,3 +134,5 @@ function EnvoiPageUtilisateur(){
 	$(".container-fluid ficheutilisateur").show()
 	
 }
+
+
