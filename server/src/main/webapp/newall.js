@@ -1,26 +1,5 @@
-	$(document).ready(function() {	
-		postUserGeneric("coco", "coco@coco", "123", "/v1/user/");
-				$("#get-ram").click(function () {getUser($('#user').val())});
-				$("#post-ram").click(function () {postUser($('#user').val())});
-				$("#list-ram").click(function () {listUsers()});
-				$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
-				$("#post-bdd1").click(function () {postUserBdd(
-				    $('#userdb').val(),
-				    $('#emaildb').val(),
-				    $('#passwddb').val())
-				    EnvoiPageUtilisateur()});
-				$("#post-bdd2").click(function (){
-					//alert($('#user').val());
-					CacheConnInscr()
-					getUserBdd("poney")
-							});
-				$("#list-bdd").click(function () {listUsersBdd()});
-				$("#read-forall").click(function () {getForAll()});
-				$("#read-byannotation").click(function () {getByAnnotation()});
-			});
-
-function getUserBdd(login) {
-	getUserGeneric(login, "172.19.162.94/v1/user/");
+function getUserBdd(name) {
+	getUserGeneric(name, "v1/user/");
 }
 
 function getUserGeneric(name, url) {
@@ -61,11 +40,11 @@ function getByAnnotation() {
      }
  }
 
-function postUserBdd(name, email, pwd) {
-    postUserGeneric(name, email, pwd, "172.19.162.94/v1/user/");
+function postUserBdd(name, alias, email, pwd) {
+    postUserGeneric(name, alias, email, pwd, "v1/user/");
 }
 
-function postUserGeneric(name, email, pwd, url) {
+function postUserGeneric(name, alias, email, pwd, url) {
 	console.log("postUserGeneric " + url)
 	$.ajax({
 		type : 'POST',
@@ -74,16 +53,15 @@ function postUserGeneric(name, email, pwd, url) {
 		dataType : "json",
 		data : JSON.stringify({
 			"name" : name,
+			"alias" : alias,
 			"email" : email,
 			"password" : pwd,
 			"id" : 0
 		}),
 		success : function(data, textStatus, jqXHR) {
-			alert("ok");
 			afficheUser(data);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert("pas ok");
 			console.log('postUser error: ' + textStatus);
 		}
 	});
@@ -104,15 +82,6 @@ function afficheUser(data) {
 	$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
 }
 
-//function afficheUser(data) {
-//	console.log(data);
-//	$(".nom-connecte").html("Bonjour " + data.name);
-//}
-
-function AfficheNomConnecte(){
-	$(".nom-connecte").html("cococo");
-}
-
 function afficheListUsers(data) {
 	var html = '<ul>';
 	var index = 0;
@@ -120,17 +89,5 @@ function afficheListUsers(data) {
 		html = html + "<li>"+ data[index].name + "</li>";
 	}
 	html = html + "</ul>";
-	$(".nom-connecte p").html(html);
+	$("#reponse").html(html);
 }
-
-function CacheConnInscr() {
-	$(".col-md-6").hide();
-}
-
-
-function EnvoiPageUtilisateur(){
-	$(".container-fluid ficheutilisateur").show()
-	
-}
-
-
