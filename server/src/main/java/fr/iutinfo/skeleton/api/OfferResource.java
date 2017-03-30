@@ -37,9 +37,9 @@ public class OfferResource {
 		if (!tableExist("offers")) {
 			logger.debug("Crate table offers");
 			dao.createOfferTable();
+			dao.insert(new Offer(0, 0, "Mon Vélo", "J'échange mon beau vélo"));
+			dao.insert(new Offer(0, 0, "Lave-linge", "Presque neuve..."));
 		}
-		dao.insert(new Offer(0, 1, "Mon Vélo", "J'échange mon beau vélo"));
-		dao.insert(new Offer(0, 1, "Lave-linge", "Presque neuve..."));
 	}
 
 	@POST
