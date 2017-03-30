@@ -1,5 +1,4 @@
-$(document).ready(function() {	
-		postUserGeneric("coco", "coco@coco", "123", "/v1/user/");
+$(document).ready(function() {
 				$("#get-ram").click(function () {getUser($('#user').val())});
 				$("#post-ram").click(function () {postUser($('#user').val())});
 				$("#list-ram").click(function () {listUsers()});
