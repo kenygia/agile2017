@@ -1,7 +1,7 @@
 let token;
 
 $(document).ready(function() {
-				
+	
 	$("#get-ram").click(function () {getUser($('#user').val())});
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
@@ -18,6 +18,7 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
+		getOffres()
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -173,22 +174,12 @@ function getAllOffres(data)
 {
 	for(var i=0;i<data.length;i++)
 	{
-		//console.log(data[i]);
 		addOffreVisual(data[i])
 	}
 }
 function addOffreVisual(json)
 {
-	/*	
-	document.getElementById("titreproduit").innerHTML=json.titre;
-	document.getElementById("descriptionproduit").innerHTML=json.detail;
-	*/
-	var unfiche = "";
-
-	unfiche += '<div class="col-sm-4 le_titre" style="font-size: large">' + json.titre + '</div>'
-	unfiche += '<div class="col-md-8 le_debut_text">' + json.detail + '</div>'
-	document.querySelector(".atoi-item").innerHTML(unfiche);
-	
+	$(".atoi-item").append('<div class="col le_titre" style="font-size: large">' + json.titre + '</div><div class="col le_debut_text">' + json.detail + '</div>');
 }
 
 $(function(){
