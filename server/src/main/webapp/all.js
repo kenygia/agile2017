@@ -12,7 +12,7 @@
 				$("#post-bdd2").click(function (){
 					//alert($('#user').val());
 					CacheConnInscr()
-					getUserBdd("poney")
+					getUserBdd("Olivier")
 							});
 				$("#list-bdd").click(function () {listUsersBdd()});
 				$("#read-forall").click(function () {getForAll()});
@@ -20,7 +20,7 @@
 			});
 
 function getUserBdd(login) {
-	getUserGeneric(login, "172.19.162.94/v1/user/");
+	getUserGeneric(login, "v1/user/");
 }
 
 function getUserGeneric(name, url) {
