@@ -1,5 +1,6 @@
 let token;
 
+
 $(document).ready(function() {
 	
 	$("#get-ram").click(function () {getUser($('#user').val())});
@@ -18,6 +19,7 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
+		getOffre(1)
 		getOffres()
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
@@ -136,7 +138,7 @@ function EnvoiPageUtilisateur(){
 
 function getOffres()
 {
-
+	let select = $(".atoi-item");
 	var url = "v1/offer";
 	 $.ajax
 	 ({
@@ -144,7 +146,7 @@ function getOffres()
 	   url: url,
 	   dataType: 'json',
 	   success: function (data) {
-		   getAllOffres(data);
+		   getAllOffres(data, select);
 	   },
 	   error : function(jqXHR, textStatus, errorThrown) {
 	   			alert('error: ' + textStatus);
@@ -155,14 +157,16 @@ function getOffres()
 
 function getOffre(id)
 {
-	var url = "v1/offer/"+id;
+	let id1 = id
+	let select = $(".amoi-item");
+	let url2 = "v1/offer/"+id1+"";
 	 $.ajax
 	 ({
 	   type: "GET",
-	   url: url,
+	   url: url2,
 	   dataType: 'json',
 	   success: function (data) {
-		   getAllOffres(data);
+		   getAllOffres(data, select);
 	   },
 	   error : function(jqXHR, textStatus, errorThrown) {
 	   			alert('error: ' + textStatus);
@@ -170,16 +174,19 @@ function getOffre(id)
      });
 }
 
-function getAllOffres(data)
-{
-	for(var i=0;i<data.length;i++)
-	{
-		addOffreVisual(data[i])
+function getAllOffres(data, select){
+	alert("avant for" + data.length);
+	var i;
+	for (i=0;i<data.length;i++) {
+		console.log("dans for" + data[i].titre);
+		alert("dans for" + data[i].titre);
+		addOffreVisual(data[i], select);
+		
 	}
 }
-function addOffreVisual(json)
+function addOffreVisual(json, select)
 {
-	$(".atoi-item").append('<div class="col le_titre" style="font-size: large">' + json.titre + '</div><div class="col le_debut_text">' + json.detail + '</div>');
+	select.append('<div class="col le_titre" style="font-size: large">' + json.titre + '</div><div class="col le_debut_text">' + json.detail + '</div>');
 }
 
 $(function(){
