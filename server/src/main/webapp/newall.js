@@ -114,3 +114,13 @@ function afficheListUsers(data) {
 	html = html + "</ul>";
 	$("#reponse").html(html);
 }
+
+function CacheConnInscr() {
+	$(".col-md-6").hide();
+}
+
+
+function EnvoiPageUtilisateur(){
+	$(".container-fluid ficheutilisateur").show()
+	
+}

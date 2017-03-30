@@ -8,7 +8,8 @@
 				    $('#userdb').val(),
 				    $('#emaildb').val(),
 				    $('#passwddb').val())
-				    EnvoiPageUtilisateur()});
+				    EnvoiPageUtilisateur()
+				    CacheConnInscr()});
 				$("#post-bdd2").click(function (){
 					//alert($('#user').val());
 					CacheConnInscr()
