@@ -78,7 +78,7 @@
 
 		<!-- fiche produit -->
 
-		<div class="container-fluid ficheproduit" style="display: block">
+		<div class="container-fluid ficheproduit" style="display: none">
 			<div class="jumbotron jumbotron-fluid">
 				<h2>Votre Produit</h2>
 				<p>Votre produit est le meilleur produit du monde, tout le monde
@@ -96,9 +96,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-8" style="background-color: lavenderblush;">
-						<h2>Texte de votre offre</h2>
-						<p>Whatever tofu squid, tumeric waistcoat shoreditch forage
+					<div class="col-sm-8" id="offreproduit" style="background-color: lavenderblush;">
+						<h2 id="titreproduit">Texte de votre offre</h2>
+						<p id="descriptionproduit">Whatever tofu squid, tumeric waistcoat shoreditch forage
 							blue bottle PBR&B. Hammock cardigan pinterest readymade, plaid
 							you probably haven't heard of them photo booth hexagon fashion
 							axe gastropub roof party jean shorts. Authentic cornhole
@@ -161,14 +161,6 @@
 
 
 
-
-
-
-
-
-
-
-
 		<!-- fiche utilisateur -->
 
 		<div class="ficheutilisateur" style="display: block">
@@ -177,9 +169,9 @@
 				<div class="col-sm-8" style="background-color: lavender;">
 					<div class="col-md-8">
 						<p>A moi</p>
-						<div class="row">
-							<div class="col-sm-4 le_titre" style="font-size: large">titre</div>
-							<div class="col-md-8 le_debut_text">début du texte</div>
+
+						<div class="amoi-item">
+
 						</div>
 					</div>
 				</div>
@@ -189,6 +181,9 @@
 				<div class="col-sm-8" style="background-color: lavender;">
 					<div class="col-md-8">
 						<p>A toi</p>
+						<div class = "atoi-item">
+						
+						</div>
 					</div>
 				</div>
 

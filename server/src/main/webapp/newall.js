@@ -1,6 +1,7 @@
 let token;
 
 $(document).ready(function() {
+	
 	$("#get-ram").click(function () {getUser($('#user').val())});
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
@@ -17,12 +18,13 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
-		alert("mon token : " + token);
+		getOffres()
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
 	$("#read-byannotation").click(function () {getByAnnotation()});
 });
+
 
 function getUserBdd(name) {
 	getUserGeneric(name, "v1/user/");
@@ -31,24 +33,7 @@ function getUserBdd(name) {
 function getUserGeneric(name, url) {
 	$.getJSON(url + name, function(data) {
 		afficheUser(data);
-		$.cookie(data.name, data.id)
 	});
-}
-
-function cookie(name, id) {
-	let header = {
-			"alg": "HS256",
-			"typ": "JWT"
-	};
-	let stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
-	let encodedHeader = base64url(stringifiedHeader);
-	let tokenen = {
-			"id": id,
-			"username": name
-	};
-	let stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(tokenen));
-	let encodedData = base64url(stringifiedData);
-	tokenen = encodedHeader + "." + encodedData;
 }
 
 
@@ -149,31 +134,52 @@ function EnvoiPageUtilisateur(){
 }
 
 
-function getOffres(url)
+function getOffres()
 {
-	$.ajax
-	({
-		type: "GET",
-		url: url,
-		dataType: 'json',
-		success: function (data) {
-			afficherAllOffres(data);
-		},
-		error : function(jqXHR, textStatus, errorThrown) {
-			alert('error: ' + textStatus);
-		}
-	});
+
+	var url = "v1/offer";
+	 $.ajax
+	 ({
+	   type: "GET",
+	   url: url,
+	   dataType: 'json',
+	   success: function (data) {
+		   getAllOffres(data);
+	   },
+	   error : function(jqXHR, textStatus, errorThrown) {
+	   			alert('error: ' + textStatus);
+	       		}
+     });
 }
 
-function afficherAllOffres(data) {
+
+function getOffre(id)
+{
+	var url = "v1/offer/"+id;
+	 $.ajax
+	 ({
+	   type: "GET",
+	   url: url,
+	   dataType: 'json',
+	   success: function (data) {
+		   getAllOffres(data);
+	   },
+	   error : function(jqXHR, textStatus, errorThrown) {
+	   			alert('error: ' + textStatus);
+	       		}
+     });
+}
+
+function getAllOffres(data)
+{
 	for(var i=0;i<data.length;i++)
 	{
-		/*if(data[i].id_user == 0)
-		{
-
-		}*/
-		console.log(data[i]);
+		addOffreVisual(data[i])
 	}
+}
+function addOffreVisual(json)
+{
+	$(".atoi-item").append('<div class="col le_titre" style="font-size: large">' + json.titre + '</div><div class="col le_debut_text">' + json.detail + '</div>');
 }
 
 $(function(){
