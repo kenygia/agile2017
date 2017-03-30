@@ -104,7 +104,7 @@ function afficheUser(data) {
 	console.log(data);
 	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
 	//alert(data.id +""+ data.alias +""+ data.name+"");
-	$(".nom-connecte").html("vous êtes connecté : " + data.alias);
+	$(".label-primary").html("vous êtes connecté : " + data.alias);
 }
 
 function afficheListUsers(data) {
