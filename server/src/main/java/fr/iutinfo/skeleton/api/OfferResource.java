@@ -16,7 +16,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +36,8 @@ public class OfferResource {
 	public OfferResource() throws SQLException {
 		if (!tableExist("offers")) {
 			logger.debug("Crate table offers");
-
 			dao.createOfferTable();
-			dao.insert(new Offer(0, 1, "Mon Vélo", "J'échange mon beau vélo"));
 		}
-		dao.deleteAll();
 		dao.insert(new Offer(0, 1, "Mon Vélo", "J'échange mon beau vélo"));
 		dao.insert(new Offer(0, 1, "Lave-linge", "Presque neuve..."));
 	}
@@ -62,6 +61,22 @@ public class OfferResource {
 		return offer.convertToDto();
 	}
 
+	@GET
+	@Path("/user")
+	public List<OfferDto> getUserAllOffers(@Context SecurityContext context) {
+		List<Offer> offers;
+        User u = (User) context.getUserPrincipal();
+		if (u.isAnonymous()) {
+			logger.debug("get all offers");
+			offers = dao.all();
+		} else {
+			logger.debug("Search offers with query: " + u.getId());
+			
+			offers = dao.allFromUser(u.getId());
+		}
+		return offers.stream().map(Offer::convertToDto).collect(Collectors.toList());
+	}
+	
 	@GET
 	public List<OfferDto> getAllOffers(@QueryParam("id_user") String id_user) {
 		List<Offer> offers;
