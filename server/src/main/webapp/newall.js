@@ -128,7 +128,7 @@ function EnvoiPageUtilisateur(){
 	
 }
 
-<<<<<<< HEAD
+
 function getOffres(url)
 {
 	 $.ajax
@@ -155,7 +155,7 @@ function afficherAllOffres(data)
 		}*/
 		console.log(data[i]);
 	}
-=======
+
 $(function(){
     $('#submitlier').click(upload);
 });
@@ -200,5 +200,5 @@ function progress(e) {
         $('#progress_percent').text(Math.floor((e.loaded * 100) / e.total));
         $('progress').attr({value:e.loaded,max:e.total});
     }
->>>>>>> 654bc0e3db74bd1305d9858dad758837582937fa
+
 }
