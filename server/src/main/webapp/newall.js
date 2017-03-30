@@ -6,11 +6,12 @@ $(document).ready(function() {
 				$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
 				$("#post-bdd1").click(function () {postUserBdd(
 						 $('#userdb').val(),
-						    $('#aliasdb').val(),
-						    $('#emaildb').val(),
-						    $('#phonedb').val(),
-						    $('#passwddb').val())
-				    EnvoiPageUtilisateur()});
+						 $('#aliasdb').val(),
+						 $('#emaildb').val(),
+						 $('#phonedb').val(),
+						 $('#passwddb').val())
+						 CacheConnInscr()
+						 EnvoiPageUtilisateur()});
 				$("#post-bdd2").click(function (){
 					//alert($('#user').val());
 					CacheConnInscr()
