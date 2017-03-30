@@ -1,3 +1,26 @@
+$(document).ready(function() {	
+		postUserGeneric("coco", "coco@coco", "123", "/v1/user/");
+				$("#get-ram").click(function () {getUser($('#user').val())});
+				$("#post-ram").click(function () {postUser($('#user').val())});
+				$("#list-ram").click(function () {listUsers()});
+				$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
+				$("#post-bdd1").click(function () {postUserBdd(
+						 $('#userdb').val(),
+						    $('#aliasdb').val(),
+						    $('#emaildb').val(),
+						    $('#phonedb').val(),
+						    $('#passwddb').val())
+				    EnvoiPageUtilisateur()});
+				$("#post-bdd2").click(function (){
+					//alert($('#user').val());
+					CacheConnInscr()
+					getUserBdd("Olivier")
+							});
+				$("#list-bdd").click(function () {listUsersBdd()});
+				$("#read-forall").click(function () {getForAll()});
+				$("#read-byannotation").click(function () {getByAnnotation()});
+			});
+
 function getUserBdd(name) {
 	getUserGeneric(name, "v1/user/");
 }
