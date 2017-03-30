@@ -21,8 +21,8 @@
 				$("#read-byannotation").click(function () {getByAnnotation()});
 			});
 
-function getUserBdd(name) {
-	getUserGeneric(name, "172.19.162.94/v1/user/");
+function getUserBdd(login) {
+	getUserGeneric(login, "172.19.162.94/v1/user/");
 }
 
 function getUserGeneric(name, url) {
