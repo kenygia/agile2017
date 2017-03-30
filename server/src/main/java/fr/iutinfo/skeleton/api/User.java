@@ -158,7 +158,7 @@ public class User implements Principal {
     }
 
     public String getSearch() {
-        search = name + " " + alias + " " + email;
+        search = name + " " + email;
         return search;
     }
 
