@@ -45,7 +45,7 @@ public class OfferResource {
 
 	@POST
     @RolesAllowed({"user"})
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	//@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public OfferDto createOffer(OfferDto dto) {
 		Offer offer = new Offer();
 		offer.initFromDto(dto);
