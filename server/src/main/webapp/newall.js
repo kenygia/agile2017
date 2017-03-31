@@ -17,6 +17,7 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
+		envoiAnnonce()
 		getOffre(1)
 		getOffres()
 	});
@@ -34,6 +35,11 @@ function CacheConnInscr() {
 function EnvoiPageUtilisateur(){
 	$(".ficheutilisateur").show()
 
+}
+
+function envoiAnnonce()
+{
+	$(".formulaireproduit").show()
 }
 
 $(function(){
@@ -94,11 +100,9 @@ function getOffre(id)
 }
 
 function getAllOffres(data, select){
-	alert("avant for" + data.length);
 	var i;
 	for (i=0;i<data.length;i++) {
 		console.log("dans for" + data[i].titre);
-		alert("dans for" + data[i].titre);
 		addOffreVisual(data[i], select);
 
 	}
