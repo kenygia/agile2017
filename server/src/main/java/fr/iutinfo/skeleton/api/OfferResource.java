@@ -42,6 +42,18 @@ public class OfferResource {
 			dao.insert(new Offer(0, 0, "Mon Vélo", "J'échange mon beau vélo"));
 			dao.insert(new Offer(0, 0, "Lave-linge", "Presque neuve..."));
 		}
+		dao.insert(new Offer(0,3,"The company","we sold it to and that way it comes under the monthly current budget and not the capital account"));
+		dao.insert(new Offer(0,4,"Machine that goes ping","This is my favorite"));
+		dao.insert(new Offer(0,5,"Centuwion","Stwike him vewy wuffly!"));
+		dao.insert(new Offer(0,6,"Strange women","Lyin' in ponds distributin' swords is no basis for a system of government"));
+		dao.insert(new Offer(0,7,"People's Front of Judea","hereby convey our sincere fraternal and sisterly greetings to you, Brian, on this, the occasion of your martyrdom"));
+		dao.insert(new Offer(0,8,"Martin Luther","his protest up to the church door in fifteen-seventeen"));
+		dao.insert(new Offer(0,9,"Joke warfare","banned at a special session of the Geneva Convention"));
+		dao.insert(new Offer(0,10,"Pero las llamas son peligrosas","Si usted ve una llama donde hay gente﻿ nadando, usted gritar: ¡Cuidado! ¡Llamas!"));
+		dao.insert(new Offer(0,3,"A roman mum","I'm a kike, a yid, a heebie, a hook-nose, I'm kosher mum, I'm a Red Sea pedestrian, and proud of it!"));
+		dao.insert(new Offer(0,4,"The capital of Assyria","There's no Messiah in here. There's a mess all right, but no Messiah."));
+		dao.insert(new Offer(0,5,"Dibley Road","At this time, a friend shall lose his friend's hammer and the young shall not know where lieth the things possessed by their fathers that their fathers put there only just the night before, about eight o'clock"));
+		
 	}
 
 	@POST
