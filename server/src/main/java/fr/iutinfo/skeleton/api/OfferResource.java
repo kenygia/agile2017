@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -44,6 +45,7 @@ public class OfferResource {
 	}
 
 	@POST
+    @RolesAllowed({"user"})
 	public OfferDto createOffer(OfferDto dto) {
 		Offer offer = new Offer();
 		offer.initFromDto(dto);
