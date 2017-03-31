@@ -1,3 +1,10 @@
+$(document).ready(function() {
+	$(".label-primary").click(function(){$(".formulaireproduit").show()});
+	
+	
+});
+
+
 //--------------------------------------------getoffres------------------------------
 
 function getOffres()
