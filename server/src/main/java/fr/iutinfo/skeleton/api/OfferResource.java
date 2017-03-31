@@ -42,6 +42,7 @@ public class OfferResource {
 			dao.insert(new Offer(0, 0, "Mon Vélo", "J'échange mon beau vélo"));
 			dao.insert(new Offer(0, 0, "Lave-linge", "Presque neuve..."));
 		}
+	
 	}
 
 	@POST
