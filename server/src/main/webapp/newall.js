@@ -1,7 +1,7 @@
 let token;
 
 $(document).ready(function() {
-				
+	
 	$("#get-ram").click(function () {getUser($('#user').val())});
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
@@ -18,7 +18,7 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
-		alert("mon token : " + token);
+		getOffres()
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -196,27 +196,9 @@ function getAllOffres(data)
 }
 function addOffreVisual(json)
 {
-/*	document.getElementById("titreproduit").innerHTML=json.titre;
-	document.getElementById("descriptionproduit").innerHTML=json.detail;
-	*/
-	var unfiche = "";
 
-	
-	//unfiche += json.titre + "\n"
-	/*unfiche += '<div class="col-sm-4 le_titre" style="font-size: large">' + json.titre + '</div>'
-	unfiche += '<div class="col-md-8 le_debut_text">' + json.detail + '</div>'*/
-	unfiche += '	<div class="col-sm-8" style="background-color: lavenderblush;">'
-	unfiche += '		<div class="form-group">'
-	unfiche += '			<label for="inputsm">'+json.titre+'</label> <input'
-	unfiche += '				class="form-control input-sm" id="inputsm" type="text">'
-	unfiche += '		</div>'
-	unfiche += '		<div class="form-group">'
-	unfiche += '			<label for="exampleTextarea">'+json.detail+'</label>'
-	unfiche += '			<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>'
-	unfiche += '		</div>'
-	unfiche += '	</div>'
-	document.querySelector(".amoi-item").innerHTML+=unfiche;
-	
+	$(".atoi-item").append('<div class="col le_titre" style="font-size: large">' + json.titre + '</div><div class="col le_debut_text">' + json.detail + '</div>');
+
 }
 
 $(function(){
