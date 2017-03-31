@@ -17,6 +17,7 @@ import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
+
 	final static Logger logger = LoggerFactory.getLogger(UserResource.class);
 	private static UserDao dao = getDbi().open(UserDao.class);
 

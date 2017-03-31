@@ -18,6 +18,7 @@ public class Offer {
 	private int id_user;
 	private String titre;
 	private String detail;
+	private boolean active;
 
 	public Offer() {
 	}
@@ -27,6 +28,7 @@ public class Offer {
 		this.id_user = id_user;
 		this.titre = titre;
 		this.detail = detail;
+		this.setActive(true);
 	}
 
 	public int getId() {
@@ -61,6 +63,14 @@ public class Offer {
 		this.detail = detail;
 	}
 
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public boolean equals(Object arg) {
 		if (getClass() != arg.getClass())
@@ -80,6 +90,7 @@ public class Offer {
 		this.setId_user(dto.getId_user());
 		this.setTitre(dto.getTitre());
 		this.setDetail(dto.getDetail());
+		this.setActive(dto.getActive());
 	}
 
 	public OfferDto convertToDto() {
@@ -88,6 +99,7 @@ public class Offer {
 		dto.setId_user(this.id_user);
 		dto.setTitre(this.titre);
 		dto.setDetail(this.detail);
+		dto.setActive(this.getActive());
 		return dto;
 	}
 }

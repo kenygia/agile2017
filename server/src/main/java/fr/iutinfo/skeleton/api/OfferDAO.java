@@ -7,10 +7,10 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import java.util.List;
 
 public interface OfferDAO {
-	@SqlUpdate("create table offers (id integer primary key autoincrement, id_user integer, titre varchar(255), detail varchar(1000))")
+	@SqlUpdate("create table offers (id integer primary key autoincrement, id_user integer, titre varchar(255), detail varchar(1000), active boolean)")
 	void createOfferTable();
 
-	@SqlUpdate("insert into offers (id_user,titre, detail) values (:id_user, :titre, :detail)")
+	@SqlUpdate("insert into offers (id_user,titre, detail, active) values (:id_user, :titre, :detail, :active)")
 	@GetGeneratedKeys
 	int insert(@BindBean() Offer offer);
 
@@ -22,10 +22,14 @@ public interface OfferDAO {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Offer> search(@Bind("titre") String titre);
 
+	@SqlQuery("select * from offers where active like 'true' ")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	List<Offer> active();
+
 	@SqlUpdate("drop table if exists offers")
 	void dropOfferTable();
 
-	@SqlUpdate("delete from offers where id = :id")
+	@SqlUpdate("update set active = 'false' from offers where id = :id")
 	void delete(@Bind("id") int id);
 	
 	@SqlUpdate("delete from offers")

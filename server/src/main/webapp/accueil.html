@@ -1,53 +1,201 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Peanuts</title>
-    <meta charset='utf-8'>
-    <!-- jQuery -->
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<title>Peanuts</title>
+<meta charset='utf-8'>
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<!-- bootstrap -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="style.css" />
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Code local -->
-    
+<!-- Code local -->
+
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <h1>Inscription :</h1>
-                <input type="text" name="userdb" id="userdb" placeholder="Nom ?" class="form-control"/>
-                <input type="text" name="user" id="aliasdb" placeholder="Surnom ?" class="form-control"/>
-                <input type="text" name="email" id="emaildb" placeholder="Email ?" class="form-control"/>
-                <input type="password" name="user" id="passwddb" placeholder="Mot de passe ?" class="form-control"/>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" id="get-bdd" class="btn btn-default">Lire</button>
-                <button type="button" id="post-bdd" class="btn btn-primary">Sauver</button>
-                <button type="button" id="list-bdd" class="btn btn-warning">Lister</button>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h1>S'identifier :</h1>
-            <input type="text" name="userlogin" id="userlogin" placeholder="Login" class="form-control"/>
-            <input type="password" name="user" id="passwdlogin" placeholder="Password" class="form-control"/>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-    </div>
-    <div class="row" style="margin-top: 1em;">
-        <div class="panel panel-info">
-            <div class="panel-heading">Réponse</div>
-            <div class="panel-body" id="reponse">
-            </div>
-        </div>
-    </div>
-    <script src="all.js"></script>
+	<!-- page-header toujours affiché -->
+
+	<div class="jumbotron jumbotron-fluid">
+		<div class="header" style="max-height: 200px; text-align: center;">
+			<h1>Peanuts</h1>
+			<p>La plateforme d'échange et de troc parfaite pour vous !</p>
+		</div>
+		<div class="nom-connecte">
+			<h3>
+				<span class="label label-primary"
+					style="position: relative; left: 70%;"></span>
+			</h3>
+		</div>
+
+
+
+		<!-- page d'accueil -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<h2>Inscription :</h2>
+						<input type="text" name="userdb" id="userdb" placeholder="Nom ?"
+							class="form-control" /> <input type="text" name="user"
+							id="aliasdb" placeholder="Surnom ?" class="form-control" /> <input
+							type="text" name="email" id="emaildb" placeholder="Email ?"
+							class="form-control" /> <input type="password" name="user"
+							id="passwddb" placeholder="Mot de passe ?" class="form-control" />
+					</div>
+					<div class="btn-group" role="group">
+						<button type="button" id="post-bdd1" class="btn btn-primary">Enregistrer</button>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<h2>S'identifier :</h2>
+						<input type="text" name="userlogin" id="userlogin"
+							placeholder="Login" class="form-control" /> <input
+							type="password" name="user" id="passwdlogin"
+							placeholder="Password" class="form-control" />
+					</div>
+					<div class="btn-group" role="group">
+						<button type="button" id="post-bdd2" class="btn btn-primary">Connexion</button>
+					</div>
+				</div>
+			</div>
+			<div class="row"></div>
+			<div class="row"></div>
+		</div>
+
+
+
+
+
+
+		<!-- fiche produit -->
+
+		<div class="container-fluid ficheproduit" style="display: none">
+			<div class="jumbotron jumbotron-fluid">
+				<h2>Votre Produit</h2>
+				<p>Votre produit est le meilleur produit du monde, tout le monde
+					voudra vous l'échanger !</p>
+				<div class="row">
+					<div class="col-sm-4" style="background-color: lavender;">
+						<div class="col-md-4">
+							<div class="thumbnail">
+								<a href="/w3images/lights.jpg" target="_blank"> <img
+									src="/w3images/lights.jpg" alt="Lights" style="width: 100%">
+									<div class="caption">
+										<p>description image 1</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8" id="offreproduit" style="background-color: lavenderblush;">
+						<h2 id="titreproduit">Texte de votre offre</h2>
+						<p id="descriptionproduit">Whatever tofu squid, tumeric waistcoat shoreditch forage
+							blue bottle PBR&B. Hammock cardigan pinterest readymade, plaid
+							you probably haven't heard of them photo booth hexagon fashion
+							axe gastropub roof party jean shorts. Authentic cornhole
+							activated charcoal paleo hella etsy. Single-origin coffee fixie
+							vice, scenester jianbing waistcoat yr crucifix tilde. Live-edge
+							DIY kickstarter fingerstache, viral pinterest fam thundercats.
+							Microdosing brooklyn bespoke, fap migas pork belly salvia selvage
+							plaid. Prism synth affogato, irony af 3 wolf moon bitters
+							intelligentsia subway tile cray lyft glossier la croix.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- fiche formulaire produit -->
+
+		<div class="container-fluid" style="display: none">
+
+
+
+			<h2>Votre Produit</h2>
+			<p>Ici vous pouvez créer et publier une annonce</p>
+			<div class="row">
+				<div class="col-sm-4" style="background-color: lavender;">
+					<div class="form-group">
+						<label for="exampleInputFile">Postez une image</label>
+						<progress max=100></progress>
+						<span id="progress_percent">0</span>% <input type="file"
+							class="form-control-file" id="exampleInputFile"
+							aria-describedby="fileHelp">
+						<!--<medium id="fileHelp" class="form-text text-muted">Avec
+						une belle image plus de monde verra votre annonce</medium>-->
+					</div>
+				</div>
+
+				<div class="col-sm-8" style="background-color: lavenderblush;">
+					<div class="form-group">
+						<label for="inputsm">Donnez un titre à votre annonce</label> <input
+							class="form-control input-sm" id="inputsm" type="text">
+					</div>
+					<div class="form-group">
+						<label for="exampleTextarea">Description</label>
+						<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+					</div>
+				</div>
+
+			</div>
+			<div class="btn-group" role="group"
+				style="position: relative; left: 95%;">
+				<button type="button" id="submitlier" class="btn btn-primary">Publier</button>
+
+			</div>
+		</div>
+
+
+
+
+		<!-- fiche utilisateur -->
+
+		<div class="ficheutilisateur" style="display: none">
+
+			<div class="row amoi">
+				<div class="col-sm-8" style="background-color: lavender;">
+					<div class="col-md-8">
+						<p>A moi</p>
+						<div class="amoi-item">
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row jeveux">
+				<div class="col-sm-8" style="background-color: lavender;">
+					<div class="col-md-8">
+						<p>A toi</p>
+						<div class = "atoi-item">
+						
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+	</div>
+
+
+	<script src="newall.js"></script>
 </body>
 
 </html>
