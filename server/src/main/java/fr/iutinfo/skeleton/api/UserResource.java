@@ -17,17 +17,16 @@ import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
-    final static Logger logger = LoggerFactory.getLogger(UserResource.class);
-    private static UserDao dao = getDbi().open(UserDao.class);
 
-    public UserResource() throws SQLException {
-        if (!tableExist("users")) {
-            logger.debug("Crate table users");
-            dao.createUserTable();
-            dao.insert(new User(0, "mag", "la Dame de fer"));
-        }
-    }
+	final static Logger logger = LoggerFactory.getLogger(UserResource.class);
+	private static UserDao dao = getDbi().open(UserDao.class);
 
+	public UserResource() throws SQLException {
+		if (!tableExist("users")) {
+			logger.debug("Crate table users");
+			dao.createUserTable();
+		}
+	}
     @POST
     public UserDto createUser(UserDto dto) {
         User user = new User();

@@ -25,7 +25,6 @@ $(document).ready(function() {
 });
 
 
-
 function CacheConnInscr() {
 	$(".col-md-6").hide();
 }
