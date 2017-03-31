@@ -22,10 +22,14 @@ public interface OfferDAO {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Offer> search(@Bind("titre") String titre);
 
+	@SqlQuery("select * from offers where active like 'true' ")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	List<Offer> active();
+
 	@SqlUpdate("drop table if exists offers")
 	void dropOfferTable();
 
-	@SqlUpdate("delete from offers where id = :id")
+	@SqlUpdate("update set active = 'false' from offers where id = :id")
 	void delete(@Bind("id") int id);
 	
 	@SqlUpdate("delete from offers")
