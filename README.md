@@ -1,6 +1,9 @@
 # Peanut
 
-Les personne qui pas d'argent qui on un quantités d'objet inversement proportionnelle, souhaitant se debarrasser des objets en question contre un autre objet sans remuneration.
+Proposez, trouvez, échangez !
+
+Peanut est une plate-forme de troc communautaire
+
 
 ## Équipe
 
