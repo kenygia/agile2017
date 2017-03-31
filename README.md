@@ -1,6 +1,6 @@
 # Peanut
 
-Proposez, trouvez, échangez !
+Proposez, trouvez, échangez vos objets !
 
 Peanut est une plate-forme de troc communautaire
 
