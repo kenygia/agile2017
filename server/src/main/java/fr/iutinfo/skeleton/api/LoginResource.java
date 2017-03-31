@@ -29,12 +29,6 @@ public class LoginResource {
         if (u.isAnonymous()) {
             throw new WebApplicationException(401);
         }
-        else if (u.isValid())
-        {
             return u;
-        }
-        return u;
-        /*else
-            throw new WebApplicationException(422);*/
     }
 }
