@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	$("#get-ram").click(function () {getUser($('#user').val())});
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
@@ -24,11 +24,12 @@ $(document).ready(function() {
 			$("#erreurdiv2").html(erreur2);
 		}
 		else{
-			CacheConnInscr()
-			getUserBdd($('#userlogin').val())
-			EnvoiPageUtilisateur()
-			getOffre(1)
-			getOffres()
+			//CacheConnInscr();
+			//getUserBdd($('#userlogin').val())
+			getSecure($('#userlogin').val(), $('#passwdlogin').val(), "v1/login")
+			//EnvoiPageUtilisateur()
+			//getOffre(1)
+			//getOffres()
 		}
 
 	});
@@ -44,7 +45,6 @@ function CacheConnInscr() {
 
 
 function EnvoiPageUtilisateur(){
-	CacheConnInscr();
 	return $(".ficheutilisateur").show();
 
 }
@@ -65,7 +65,6 @@ function progress(e) {
 	}
 
 }
-
 
 function getError1(name,email,pwd){
 	let erreur = '';
@@ -89,12 +88,12 @@ function getError2(name,pwd){
 
 
 function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
 }
 
 
-// --------------------------------------------getoffres------------------------------
+//--------------------------------------------getoffres------------------------------
 
 function getOffres()
 {
@@ -157,7 +156,7 @@ function getByAnnotation() {
 }
 
 
-// --------------------------------------------getutilisateurs--------------------------
+//--------------------------------------------getutilisateurs--------------------------
 
 function getSecure(url) {
 	if($("#userlogin").val() != "") {
@@ -183,16 +182,66 @@ function getSecure(url) {
 	}
 }
 
-function getUserBdd(name) {
-	 	getUserGeneric(name, "v1/user/");
-	 }
 
-function getUserGeneric(name, url) {
-	$.getJSON(url + name, function(data) {
-		afficheUser(data);
-	});
+function getSecure(user, password, url) {
+	let token = make_base_auth(user, password);
+		$.ajax
+		({
+			type: "GET",
+			url: url,
+			dataType: 'json',
+			beforeSend : function(req) {
+				req.setRequestHeader('Authorization', make_base_auth(user, password));
+			},
+			success: function (data) {
+				alert("connexion ok");
+				afficheUser(data);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert('quelle error: ' + textStatus);
+			}
+		});
 }
 
+
+function make_base_auth(user, password) {
+	  var tok = user + ':' + password;
+	  var hash = btoa(tok);
+	  return "Basic " + hash;
+}
+
+
+
+function getUserBdd(name) {
+	getUserGeneric(name, "v1/user/");
+}
+
+function getUserGeneric(name, url) {
+//	$.ajax({
+//		type: "GET",
+//		url: url + name,
+//		success:function(data){
+//			if(data==1)
+//			{
+//				alert("le compte existe bien");
+//			}
+//			else
+//			{
+//				alert("le compte n'existe pas");
+//			}
+//		},
+//		error : function(jqXHR, textStatus, errorThrown) {
+//			alert('le nom de lerror: ' + textStatus);
+//
+//		}
+//
+//	});
+	
+
+//	$.getJSON(url + name, function(data) {
+//		afficheUser(data);
+//	});
+}
 
 
 function afficheUser(data) {
@@ -203,7 +252,7 @@ function afficheUser(data) {
 	$(".label-primary").html("vous êtes connecté : " + data.alias);
 }
 
-// -------------------------------------------getliste-utilisateur---------------------------------
+//-------------------------------------------getliste-utilisateur---------------------------------
 
 
 function listUsersBdd() {
@@ -227,12 +276,13 @@ function afficheListUsers(data) {
 }
 
 
-// -------------------------------------------post-utilisateur---------------------------------
+//-------------------------------------------post-utilisateur---------------------------------
 function postUserBdd(name, alias, email, pwd) {
 	postUserGeneric(name, alias, email, pwd, "v1/user/");
 	return EnvoiPageUtilisateur();
-	
+
 }
+
 
 function postUserGeneric(name, alias, email, pwd, url) {
 	console.log("postUserGeneric " + url)
@@ -256,7 +306,7 @@ function postUserGeneric(name, alias, email, pwd, url) {
 		}
 	});
 }
-// --------------------------------------------postoffres------------------------------
+//--------------------------------------------postoffres------------------------------
 
 
 function postAnnonce(){
