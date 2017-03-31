@@ -39,4 +39,21 @@ public class OfferDaoTest {
 		Assert.assertEquals(4, list.size());
 	}
 
+	@Test
+	public void shouldReturnOneOfferWhenFind() {
+		String titre = "Mon titre 2 ";
+		dao.insert(new Offer(0, 1, "Mon titre 2 ", "Mes détailsdétailsdétails"));
+		Offer offer = dao.findByName(titre);
+		Assert.assertEquals(titre, offer.getTitre());
+	}
+	
+	@Test
+	public void shouldReturnTwoOffersWhenAskUser(){
+		dao.insert(new Offer(0, 1, "Mon titre 2 ", "Mes détailsdétailsdétails"));
+		dao.insert(new Offer(0, 1, "Mon titre 4 ", "Mes détailsddétails"));
+		dao.insert(new Offer(0, 2, "Mon titre 4 ", "Mes détailsddétails"));
+		List<Offer> list = dao.allFromUser(1);
+		Assert.assertEquals(2, list.size());
+	}
+
 }
