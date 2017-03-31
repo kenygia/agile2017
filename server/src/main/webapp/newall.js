@@ -8,10 +8,7 @@ $(document).ready(function() {
 			$('#userdb').val(),
 			$('#aliasdb').val(),
 			$('#emaildb').val(),
-			$('#phonedb').val(),
-			$('#passwddb').val())
-			CacheConnInscr()
-			EnvoiPageUtilisateur()});
+			$('#passwddb').val())});
 	$("#post-bdd2").click(function (){
 		
 		CacheConnInscr()
@@ -32,7 +29,8 @@ function CacheConnInscr() {
 
 
 function EnvoiPageUtilisateur(){
-	$(".ficheutilisateur").show()
+	CacheConnInscr();
+	return $(".ficheutilisateur").show();
 
 }
 
@@ -189,25 +187,16 @@ function afficheListUsers(data) {
 
 //-------------------------------------------post-utilisateur---------------------------------
 function postUserBdd(name, alias, email, pwd) {
-	alert("name : "+name+"email : "+ email)
-	if (name != "" && pwd != "" && email !="")
+	
+	if (name == "" || pwd == "" || email == "")
 	{
-	     return postUserGeneric(name, alias, email, pwd, "v1/user/");
+	     alert('Remplissez tous les champs');
+	     return false ;
 	}
-	else if (name == "")
+	else if (name != "" && pwd != "" && email !="")
 	{
-	     alert('Remplissez le champs nom');
-	     return false;
-	}
-	else if (pwd == "")
-	{
-	     alert('Remplissez le champs prénom');
-	     return false;
-	}
-	else (email == "")
-	{
-	     alert('Remplissez le champs prénom');
-	     return false;
+	    postUserGeneric(name, alias, email, pwd, "v1/user/");
+		return EnvoiPageUtilisateur();
 	}
 }
 
