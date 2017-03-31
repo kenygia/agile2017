@@ -34,7 +34,6 @@ $(document).ready(function() {
 			//getOffre(1)
 			//getOffres()
 		}
-
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -59,9 +58,9 @@ function envoiAnnonce()
 	{
 		// On empêche le navigateur de soumettre le formulaire
 		e.preventDefault();
-	 
+
 		var $form = $(this);
-		 
+
 		$.ajax(
 		{
 			url: $form.attr('action'),
@@ -73,7 +72,7 @@ function envoiAnnonce()
 	    	}
 	  	});
 	});
-	
+
 }
 
 
@@ -89,21 +88,21 @@ function progress(e) {
 function getError1(name,email,pwd){
 	let erreur = '';
 	if (name== "")
-		erreur += "<p>vous devez ajouter un nom </p>" ;		
+		erreur += "<p>vous devez ajouter un nom </p>" ;
 	if (email== "" || !validateEmail(email))
-		erreur += "<p>vous devez ajouter un email valide</p>" ;		
+		erreur += "<p>vous devez ajouter un email valide</p>" ;
 	if (pwd== "")
 		erreur += "<p>vous devez ajouter un un mot de passe </p>" ;
-	return erreur ; 
+	return erreur ;
 }
 
 function getError2(name,pwd){
 	let erreur = '';
 	if (name== "")
-		erreur += "<p>vous devez ajouter un nom </p>" ;			
+		erreur += "<p>vous devez ajouter un nom </p>" ;
 	if (pwd== "")
 		erreur += "<p>vous devez ajouter un un mot de passe </p>" ;
-	return erreur ; 
+	return erreur ;
 }
 
 
@@ -350,18 +349,20 @@ function postAnnonce(){
 			req.setRequestHeader("Authorization", "Basic " + user_token);
 		},
 		data : JSON.stringify({
-			"titre" : document.querySelector(".formulaireproduit #titre"),
-			"detail" : document.querySelector(".formulaireproduit #detail"),
+			"titre" : document.querySelector(".formulaireproduit #titre").value,
+			"detail" : document.querySelector(".formulaireproduit #detail").value,
 			"user_id" : user.id
 		}),
 		success : function(data, textStatus, jqXHR) {
+			console.log(data);
 			getOffres();
 		},
-		error : function(jqXHR, textStatus, errorThrown) {
+		error : function(jqXHR, textStatus, errorThrown, data) {
+			console.log(data);
 			console.log('postAnnonce : ' + textStatus + errorThrown + jqXHR);
 		}
 	});
-	
+
 	/*
 	$.ajax({
 		url: 'v1/offer/',
@@ -391,4 +392,3 @@ function postAnnonce(){
 		}
 	});*/
 }
-
