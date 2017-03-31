@@ -29,38 +29,6 @@ function getUserGeneric(name, url) {
 	});
 }
 
-function getForAll() {
-	getSecure("v1/secure/who");
-}
-
-function getByAnnotation() {
-	getSecure("v1/secure/byannotation");
-}
-
- function getSecure(url) {
- if($("#userlogin").val() != "") {
-     $.ajax
-     ({
-       type: "GET",
-       url: url,
-       dataType: 'json',
-       beforeSend : function(req) {
-        req.setRequestHeader("Authorization", "Basic " + btoa($("#userlogin").val() + ":" + $("#passwdlogin").val()));
-       },
-       success: function (data) {
-        afficheUser(data);
-       },
-       error : function(jqXHR, textStatus, errorThrown) {
-       			alert('error: ' + textStatus);
-       		}
-     });
-     } else {
-     $.getJSON(url, function(data) {
-     	    afficheUser(data);
-        });
-     }
- }
-
 function postUserBdd(name, email, pwd) {
     postUserGeneric(name, email, pwd, "172.19.162.94/v1/user/");
 }
