@@ -33,7 +33,8 @@ public class LoginResource {
         {
             return u;
         }
-        else
-            throw new WebApplicationException(422);
+        return u;
+        /*else
+            throw new WebApplicationException(422);*/
     }
 }
