@@ -34,10 +34,25 @@ function CacheConnInscr() {
 	$(".col-md-6").hide();
 }
 
+function initAllOffre()
+{
+		var b = $(".jeveux").show();
+		getOffres();
+		return b;
+}
+
+
+function initMesOffre()
+{
+		var b = $(".jemeux").show();
+		getMesOffres();
+		return b;
+}
+
 
 function EnvoiPageUtilisateur(){
 	CacheConnInscr();
-	return $(".ficheutilisateur").show();
+	return initAllOffre();
 
 }
 
