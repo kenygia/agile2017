@@ -30,6 +30,7 @@ $(document).ready(function() {
 			getOffre(1)
 			getOffres()
 		}
+
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -46,6 +47,11 @@ function EnvoiPageUtilisateur(){
 	CacheConnInscr();
 	return $(".ficheutilisateur").show();
 
+}
+
+function envoiAnnonce()
+{
+	$(".formulaireproduit").show()
 }
 
 $(function(){
@@ -132,7 +138,6 @@ function getAllOffres(data, select){
 	var i;
 	for (i=0;i<data.length;i++) {
 		console.log("dans for" + data[i].titre);
-		// alert("dans for" + data[i].titre);
 		addOffreVisual(data[i], select);
 
 	}

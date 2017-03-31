@@ -186,4 +186,10 @@ public class User implements Principal {
         dto.setPassword(this.getPassword());
         return dto;
     }
+
+	public boolean isValid() {
+		if (this.name.isEmpty() && this.email.isEmpty() && this.getPassword().isEmpty() && this.email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$"))
+			return false;
+		else return true;
+	}
 }
