@@ -7,22 +7,33 @@ $(document).ready(function() {
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
 	$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
-	$("#post-bdd1").click(function () {postUserBdd(
-			$('#userdb').val(),
-			$('#aliasdb').val(),
-			$('#emaildb').val(),
-			$('#phonedb').val(),
-			$('#passwddb').val())
-			CacheConnInscr()
-			EnvoiPageUtilisateur()});
-	$("#post-bdd2").click(function (){
+	$("#post-bdd1").click(function () {
+		erreur = getError1($('#userdb').val(), $('#emaildb').val(), $('#passwddb').val());
+		if(erreur !=''){
+			$("#erreurdiv1").html(erreur);
+		}
+		else{
+			postUserBdd(
+					$('#userdb').val(),
+					$('#aliasdb').val(),
+					$('#emaildb').val(),
+					$('#passwddb').val())
+		}
+	});
 
-		CacheConnInscr()
-		getUserBdd($('#userlogin').val())
-		EnvoiPageUtilisateur()
-		envoiAnnonce()
-		//getOffre(1)
-		getOffres()
+	$("#post-bdd2").click(function (){
+		erreur2 = getError2($('#userlogin').val(), $('#passwdlogin').val());
+		if(erreur2 !=''){
+			$("#erreurdiv2").html(erreur2);
+		}
+		else{
+			//CacheConnInscr();
+			//getUserBdd($('#userlogin').val())
+			getSecure($('#userlogin').val(), $('#passwdlogin').val(), "v1/login")
+			//EnvoiPageUtilisateur()
+			//getOffre(1)
+			//getOffres()
+		}
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -51,8 +62,12 @@ function initMesOffre()
 
 
 function EnvoiPageUtilisateur(){
+
 	CacheConnInscr();
-	return initAllOffre();
+	$(".ficheutilisateur").show();
+	 return initAllOffre();
+
+	
 
 }
 
@@ -90,7 +105,6 @@ function progress(e) {
 
 }
 
-
 function getError1(name,email,pwd){
 	let erreur = '';
 	if (name== "")
@@ -113,12 +127,12 @@ function getError2(name,pwd){
 
 
 function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
 }
 
 
-// --------------------------------------------getoffres------------------------------
+//--------------------------------------------getoffres------------------------------
 
 function getOffres()
 {
@@ -180,7 +194,7 @@ function getByAnnotation() {
 }
 
 
-// --------------------------------------------getutilisateurs--------------------------
+//--------------------------------------------getutilisateurs--------------------------
 
 function getSecure(url) {
 	if($("#userlogin").val() != "") {
@@ -206,11 +220,64 @@ function getSecure(url) {
 	}
 }
 
+
+function getSecure(user, password, url) {
+	let token = make_base_auth(user, password);
+		$.ajax
+		({
+			type: "GET",
+			url: url,
+			dataType: 'json',
+			beforeSend : function(req) {
+				req.setRequestHeader('Authorization', make_base_auth(user, password));
+			},
+			success: function (data) {
+				$("#erreurdiv2").html('');
+				CacheConnInscr();
+				EnvoiPageUtilisateur();
+				afficheUser(data);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				$("#erreurdiv2").html('<p>'+errorThrown+'<p>');
+			}
+		});
+}
+
+
+function make_base_auth(user, password) {
+	  var tok = user + ':' + password;
+	  var hash = btoa(tok);
+	  return "Basic " + hash;
+}
+
+
+
 function getUserBdd(name) {
-	 	getUserGeneric(name, "v1/user/");
-	 }
+	getUserGeneric(name, "v1/user/");
+}
 
 function getUserGeneric(name, url) {
+
+//	$.ajax({
+//		type: "GET",
+//		url: url + name,
+//		success:function(data){
+//			if(data==1)
+//			{
+//				alert("le compte existe bien");
+//			}
+//			else
+//			{
+//				alert("le compte n'existe pas");
+//			}
+//		},
+//		error : function(jqXHR, textStatus, errorThrown) {
+//			alert('le nom de lerror: ' + textStatus);
+//
+//		}
+//
+//	});
+	
 	$.getJSON(url + name, function(data) {
 		console.log(data);
 		user = data;
@@ -229,7 +296,7 @@ function afficheUser(data) {
 	$(".label-primary").html("vous êtes connecté : " + data.alias);
 }
 
-// -------------------------------------------getliste-utilisateur---------------------------------
+//-------------------------------------------getliste-utilisateur---------------------------------
 
 
 function listUsersBdd() {
@@ -253,12 +320,13 @@ function afficheListUsers(data) {
 }
 
 
-// -------------------------------------------post-utilisateur---------------------------------
+//-------------------------------------------post-utilisateur---------------------------------
 function postUserBdd(name, alias, email, pwd) {
 	postUserGeneric(name, alias, email, pwd, "v1/user/");
 	return EnvoiPageUtilisateur();
 
 }
+
 
 function postUserGeneric(name, alias, email, pwd, url) {
 	console.log("postUserGeneric " + url)
@@ -281,7 +349,7 @@ function postUserGeneric(name, alias, email, pwd, url) {
 		}
 	});
 }
-// --------------------------------------------postoffres------------------------------
+//--------------------------------------------postoffres------------------------------
 
 document.querySelector("#submitlier").addEventListener("click", postAnnonce);
 
