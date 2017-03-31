@@ -7,8 +7,7 @@ $(document).ready(function() {
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
 	$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
-<<<<<<< HEAD
-	$("#post-bdd1").click(function () {postUsmainerBdd(
+	$("#post-bdd1").click(function () {postUserBdd(
 			$('#userdb').val(),
 			$('#aliasdb').val(),
 			$('#emaildb').val(),
@@ -24,35 +23,6 @@ $(document).ready(function() {
 		envoiAnnonce()
 		//getOffre(1)
 		getOffres()
-=======
-	$("#post-bdd1").click(function () {
-		erreur = getError1($('#userdb').val(), $('#emaildb').val(), $('#passwddb').val());
-		if(erreur !=''){
-			$("#erreurdiv1").html(erreur);
-		}
-		else{
-			postUserBdd(
-					$('#userdb').val(),
-					$('#aliasdb').val(),
-					$('#emaildb').val(),
-					$('#passwddb').val())
-		}
-	});
-
-	$("#post-bdd2").click(function (){
-		erreur2 = getError2($('#userlogin').val(), $('#passwdlogin').val());
-		if(erreur2 !=''){
-			$("#erreurdiv2").html(erreur2);
-		}
-		else{
-			CacheConnInscr()
-			getUserBdd($('#userlogin').val())
-			EnvoiPageUtilisateur()
-			getOffre(1)
-			getOffres()
-		}
-
->>>>>>> 8c84bdecd2ad0d33433bea5bc5cfdfec2519559d
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
