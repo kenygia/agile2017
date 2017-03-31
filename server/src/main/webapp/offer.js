@@ -1,5 +1,7 @@
+var user_token = "";
+
 $(document).ready(function() {
-	$(".label-primary").click(function(){$(".formulaireproduit").show()});
+
 	
 	
 });
@@ -73,19 +75,21 @@ function getByAnnotation() {
 document.querySelector("#submitlier").addEventListener("click", postAnnonce);
 
 function postAnnonce(){
+	
 	//var file = $('#exampleInputFile').get(0).files[0];
 	console.log("on publie");
 	var formData = new FormData();
 	//formData.append('file', file);
-	var url = "/v1/offer"
-		console.log("postAnnonce: " + url)
+	var url = "/v1/offer";
+		console.log("postAnnonce: " + url);
+		console.log(user.id);
 		$.ajax({
 			type : 'POST',
 			contentType : 'application/json',
 			url : url,
 			dataType : "json",
 			beforeSend : function(req) {
-				req.setRequestHeader("Authorization", "Basic " + user_token);
+				req.setRequestHeader("Authorization", "Basic " +  btoa($("#userlogin").val() + ":" + $("#passwdlogin").val()));
 			},
 			data : JSON.stringify({
 				"titre" : document.querySelector(".formulaireproduit #titre").value,
@@ -93,7 +97,7 @@ function postAnnonce(){
 				"user_id" : user.id
 			}),
 			success : function(data, textStatus, jqXHR) {
-				console.log(data);
+				console.log("id : "+data.id);
 				getOffres();
 			},
 			error : function(jqXHR, textStatus, errorThrown, data) {

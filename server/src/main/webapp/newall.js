@@ -29,7 +29,8 @@ $(document).ready(function() {
 		else{
 			//CacheConnInscr();
 			//getUserBdd($('#userlogin').val())
-			getSecure($('#userlogin').val(), $('#passwdlogin').val(), "v1/login")
+			getSecure($('#userlogin').val(), $('#passwdlogin').val(), "v1/login");
+			$(".btn-success").click(function(){$(".formulaireproduit").show()});
 			//EnvoiPageUtilisateur()
 			//getOffre(1)
 			//getOffres()
@@ -122,6 +123,8 @@ function getSecure(url) {
 				req.setRequestHeader("Authorization", "Basic " + btoa($("#userlogin").val() + ":" + $("#passwdlogin").val()));
 			},
 			success: function (data) {
+				console.log(data);
+				user = data;
 				afficheUser(data);
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
@@ -130,6 +133,8 @@ function getSecure(url) {
 		});
 	} else {
 		$.getJSON(url, function(data) {
+			console.log(data);
+			user = data;
 			afficheUser(data);
 		});
 	}
@@ -263,4 +268,24 @@ function postUserGeneric(name, alias, email, pwd, url) {
 			console.log('postUser error: ' + textStatus);
 		}
 	});
+	
+
+	function getOffres()
+	{
+		let select = $(".atoi-item");
+		var url = "v1/offer/all";
+		$.ajax
+		({
+			type: "GET",
+			url: url,
+			dataType: 'json',
+			success: function (data) {
+				getAllOffres(data, select);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert('error: ' + textStatus);
+			}
+		});
+	}
+
 }
