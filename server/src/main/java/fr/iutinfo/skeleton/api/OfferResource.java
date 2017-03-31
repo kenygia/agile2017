@@ -39,20 +39,23 @@ public class OfferResource {
 		if (!tableExist("offers")) {
 			logger.debug("Crate table offers");
 			dao.createOfferTable();
-			dao.insert(new Offer(0, 0, "Mon Vélo", "J'échange mon beau vélo"));
-			dao.insert(new Offer(0, 0, "Lave-linge", "Presque neuve..."));
 		}
 	
 	}
 
 	@POST
     @RolesAllowed({"user"})
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public OfferDto createOffer(OfferDto dto) {
 		Offer offer = new Offer();
 		offer.initFromDto(dto);
-		int id = dao.insert(offer);
-		dto.setId(id);
-		return dto;
+		if (offer.isValid())
+		{
+			int id = dao.insert(offer);
+			dto.setId(id);
+			return dto;
+		}
+		else throw new WebApplicationException(422);
 	}
 
 	@GET
