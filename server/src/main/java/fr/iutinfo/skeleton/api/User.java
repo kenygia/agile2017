@@ -30,7 +30,7 @@ public class User implements Principal {
 
     public User(int id, String name, String alias) {
         this.id = id;
-        this.name = name.toLowerCase();
+        this.name = name;
         this.alias = alias;
     }
 
@@ -46,7 +46,7 @@ public class User implements Principal {
     }
 
     public void setEmail(String email) {
-        this.email = email.toLowerCase();
+        this.email = email;
     }
 
 	public String getPhone() {
