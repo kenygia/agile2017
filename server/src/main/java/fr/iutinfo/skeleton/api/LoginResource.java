@@ -31,8 +31,9 @@ public class LoginResource {
         }
         else if (u.isValid())
         {
-            throw new WebApplicationException(422);
+            return u;
         }
-        return u;
+        else
+            throw new WebApplicationException(422);
     }
 }
