@@ -35,7 +35,24 @@ function getUserBdd(name) {
 function getUserGeneric(name, url) {
 	$.getJSON(url + name, function(data) {
 		afficheUser(data);
+		$.cookie(data.name, data.id)
 	});
+}
+
+function cookie(name, id) {
+	let header = {
+			"alg": "HS256",
+			"typ": "JWT"
+	};
+	let stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+	let encodedHeader = base64url(stringifiedHeader);
+	let tokenen = {
+			"id": id,
+			"username": name
+	};
+	let stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(tokenen));
+	let encodedData = base64url(stringifiedData);
+	tokenen = encodedHeader + "." + encodedData;
 }
 
 
@@ -186,7 +203,9 @@ function getAllOffres(data, select){
 }
 function addOffreVisual(json, select)
 {
+
 	select.append('<div class="col le_titre" style="font-size: large">' + json.titre + '</div><div class="col le_debut_text">' + json.detail + '</div>');
+
 }
 
 $(function(){
