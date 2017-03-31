@@ -38,6 +38,7 @@ $(document).ready(function() {
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
 	$("#read-byannotation").click(function () {getByAnnotation()});
+	$("#deconnexion").click(function () {location.reload()});
 });
 
 
@@ -64,6 +65,7 @@ function initMesOffre()
 function EnvoiPageUtilisateur(){
 
 	CacheConnInscr();
+	$(".nom-connecte").show();
 	$(".ficheutilisateur").show();
 	return initAllOffre();
 
@@ -79,10 +81,14 @@ function getError1(name,email,pwd){
 	let erreur = '';
 	if (name== "")
 		erreur += "<p>vous devez ajouter un nom </p>" ;
+	if (name.length > 100)
+		erreur += "<p>votre nom est trop long</p>" ;
 	if (email== "" || !validateEmail(email))
 		erreur += "<p>vous devez ajouter un email valide</p>" ;
 	if (pwd== "")
 		erreur += "<p>vous devez ajouter un un mot de passe </p>" ;
+	if (pwd.length > 64)
+		erreur += "<p>votre mot de passe est trop long</p>" ;
 	return erreur ;
 }
 
@@ -202,7 +208,7 @@ function afficheUser(data) {
 	// $("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name
 	// + ")");
 	// alert(data.id +""+ data.alias +""+ data.name+"");
-	$(".label-primary").html("vous êtes connecté : " + data.alias);
+	$(".btn-success").html("vous êtes connecté : " + data.alias);
 }
 
 //-------------------------------------------getliste-utilisateur---------------------------------

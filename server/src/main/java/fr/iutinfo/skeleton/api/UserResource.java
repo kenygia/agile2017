@@ -32,6 +32,10 @@ public class UserResource {
         User user = new User();
         user.initFromDto(dto);
         user.resetPasswordHash();
+    	int id = dao.insert(user);
+        dto.setId(id);
+        return dto;
+        /*
         if (user.isValid())
 		{
         	int id = dao.insert(user);
@@ -39,6 +43,7 @@ public class UserResource {
 	        return dto;
 		}
 		else throw new WebApplicationException(422);
+		*/
     }
     
     @GET
