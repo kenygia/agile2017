@@ -208,7 +208,7 @@ function afficheUser(data) {
 	// $("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name
 	// + ")");
 	// alert(data.id +""+ data.alias +""+ data.name+"");
-	$(".btn-success").html("vous êtes connecté : " + data.alias);
+	$(".btn-success").append("   " + data.alias);
 }
 
 //-------------------------------------------getliste-utilisateur---------------------------------
