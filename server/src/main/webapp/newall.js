@@ -1,10 +1,13 @@
+var user = "";
+var user_token = "";
+
 $(document).ready(function() {
 	
 	$("#get-ram").click(function () {getUser($('#user').val())});
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
 	$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
-	$("#post-bdd1").click(function () {postUserBdd(
+	$("#post-bdd1").click(function () {postUsmainerBdd(
 			$('#userdb').val(),
 			$('#aliasdb').val(),
 			$('#emaildb').val(),
@@ -18,7 +21,7 @@ $(document).ready(function() {
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
 		envoiAnnonce()
-		getOffre(1)
+		//getOffre(1)
 		getOffres()
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
@@ -40,11 +43,28 @@ function EnvoiPageUtilisateur(){
 function envoiAnnonce()
 {
 	$(".formulaireproduit").show()
+	$('#submitlier').on('submit', function (e)
+	{
+		// On empêche le navigateur de soumettre le formulaire
+		e.preventDefault();
+	 
+		var $form = $(this);
+		 
+		$.ajax(
+		{
+			url: $form.attr('action'),
+			type: $form.attr('method'),
+	      	data: $form.serialize(),
+	      	success: function (response)
+	      	{
+	                // La réponse du serveur
+	    	}
+	  	});
+	});
+	
 }
 
-$(function(){
-	$('#submitlier').click(upload);
-});
+
 
 function progress(e) {
 	if (e.lengthComputable) {
@@ -64,7 +84,7 @@ function alertChampVide(){
 function getOffres()
 {
 	let select = $(".atoi-item");
-	var url = "v1/offer";
+	var url = "v1/offer/all";
 	$.ajax
 	({
 		type: "GET",
@@ -153,6 +173,9 @@ function getUserBdd(name) {
 
 function getUserGeneric(name, url) {
 	$.getJSON(url + name, function(data) {
+		console.log(data);
+		user = data;
+		user_token = btoa($("#userlogin").val() + ":" + $("#passwdlogin").val());
 		afficheUser(data);
 	});
 }
@@ -160,7 +183,7 @@ function getUserGeneric(name, url) {
 
 
 function afficheUser(data) {
-	console.log(data);
+	//console.log(data);
 	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
 	//alert(data.id +""+ data.alias +""+ data.name+"");
 	$(".label-primary").html("vous êtes connecté : " + data.alias);
@@ -225,8 +248,7 @@ function postUserGeneric(name, alias, email, pwd, url) {
 			"name" : name,
 			"alias" : alias,
 			"email" : email,
-			"password" : pwd,
-			"id" : 0
+			"password" : pwd
 		}),
 		success : function(data, textStatus, jqXHR) {
 			afficheUser(data);
@@ -238,29 +260,53 @@ function postUserGeneric(name, alias, email, pwd, url) {
 }
 //--------------------------------------------postoffres------------------------------
 
+document.querySelector("#submitlier").addEventListener("click", postAnnonce);
 
 function postAnnonce(){
-	var file = $('#exampleInputFile').get(0).files[0];
-
+	//var file = $('#exampleInputFile').get(0).files[0];
+	console.log("on publie");
 	var formData = new FormData();
-	formData.append('file', file);
-
+	//formData.append('file', file);
+	var url = "/v1/offer"
+	console.log("postAnnonce: " + url)
 	$.ajax({
-		url: 'v1/user/',
+		type : 'POST',
+		contentType : 'application/json',
+		url : url,
+		dataType : "json",
+		beforeSend : function(req) {
+			req.setRequestHeader("Authorization", "Basic " + user_token);
+		},
+		data : JSON.stringify({
+			"titre" : document.querySelector(".formulaireproduit #titre"),
+			"detail" : document.querySelector(".formulaireproduit #detail"),
+			"user_id" : user.id
+		}),
+		success : function(data, textStatus, jqXHR) {
+			getOffres();
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			console.log('postAnnonce : ' + textStatus + errorThrown + jqXHR);
+		}
+	});
+	
+	/*
+	$.ajax({
+		url: 'v1/offer/',
 		type: 'POST',
 		data: formData,
 		cache: false,
 		contentType: false,
 		processData: false,
 		success: function(){
-			alert('file upload complete');
+			console.log('file upload complete');
 		},
 		error: function(response){
 			var error = "error";
-			if (response.status === 409){
+			if (response.status != 200){
 				error = response.responseText;
 			}
-			alert(error);
+			console.log(error);
 		},
 		xhr: function() {
 			var myXhr = $.ajaxSettings.xhr();
@@ -271,6 +317,6 @@ function postAnnonce(){
 			}
 			return myXhr;
 		}
-	});
+	});*/
 }
 
