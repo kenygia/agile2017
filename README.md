@@ -2,7 +2,7 @@
 
 Proposez, trouvez, échangez vos objets !
 
-Peanut est une plate-forme de troc communautaire
+Peanut est une plate-forme de troc communautaire disponible en version web et android
 
 
 ## Équipe
