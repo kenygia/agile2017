@@ -13,6 +13,7 @@ $(document).ready(function() {
 			CacheConnInscr()
 			EnvoiPageUtilisateur()});
 	$("#post-bdd2").click(function (){
+		
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
@@ -45,4 +46,8 @@ function progress(e) {
 		$('progress').attr({value:e.loaded,max:e.total});
 	}
 
+}
+
+function alertChampVide(){
+	alert("champ vide");
 }

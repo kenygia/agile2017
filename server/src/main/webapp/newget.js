@@ -90,6 +90,10 @@ function getSecure(url) {
 	}
 }
 
+function getUserBdd(name) {
+	 	getUserGeneric(name, "v1/user/");
+	 }
+
 function getUserGeneric(name, url) {
 	$.getJSON(url + name, function(data) {
 		afficheUser(data);

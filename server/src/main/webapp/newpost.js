@@ -1,6 +1,24 @@
 
 function postUserBdd(name, alias, email, pwd) {
-	postUserGeneric(name, alias, email, pwd, "v1/user/");
+	if (name != NULL && pwd != NULL && email !=NULL)
+	{
+	     return postUserGeneric(name, alias, email, pwd, "v1/user/");
+	}
+	else if (name == NULL)
+	{
+	     alert('Remplissez le champs nom');
+	     return false;
+	}
+	else if (pwd == NULL)
+	{
+	     alert('Remplissez le champs prénom');
+	     return false;
+	}
+	else (email == NULL)
+	{
+	     alert('Remplissez le champs prénom');
+	     return false;
+	}
 }
 
 function postUserGeneric(name, alias, email, pwd, url) {
