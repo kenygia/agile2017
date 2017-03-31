@@ -17,6 +17,7 @@ $(document).ready(function() {
 		CacheConnInscr()
 		getUserBdd($('#userlogin').val())
 		EnvoiPageUtilisateur()
+		envoyerOffre()
 		getOffre(1)
 		getOffres()
 	});
@@ -34,6 +35,11 @@ function CacheConnInscr() {
 function EnvoiPageUtilisateur(){
 	$(".ficheutilisateur").show()
 
+}
+
+function envoyerOffre()
+{
+	$(".formulaireproduit").show()
 }
 
 $(function(){
