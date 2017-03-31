@@ -102,4 +102,10 @@ public class Offer {
 		dto.setActive(this.getActive());
 		return dto;
 	}
+
+	public boolean isValid() {
+		if (this.titre.isEmpty() && this.detail.isEmpty())
+			return false;
+		else return true;
+	}
 }

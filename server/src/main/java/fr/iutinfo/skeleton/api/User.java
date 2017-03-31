@@ -30,7 +30,7 @@ public class User implements Principal {
 
     public User(int id, String name, String alias) {
         this.id = id;
-        this.name = name;
+        this.name = name.toLowerCase();
         this.alias = alias;
     }
 
@@ -46,7 +46,7 @@ public class User implements Principal {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
 	public String getPhone() {
@@ -186,4 +186,10 @@ public class User implements Principal {
         dto.setPassword(this.getPassword());
         return dto;
     }
+
+	public boolean isValid() {
+		if (this.name.isEmpty() && this.email.isEmpty() && this.getPassword().isEmpty() && this.email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$"))
+			return false;
+		else return true;
+	}
 }
