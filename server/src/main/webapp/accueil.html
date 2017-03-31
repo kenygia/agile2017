@@ -40,12 +40,12 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
+				<div class="col-md-6" id="inscripteur">
+					<div class="form-group" >
 						<h2>Inscription :</h2>
 						<input type="text" name="userdb" id="userdb" placeholder="Nom ?"
 							class="form-control" /> <input type="text" name="user"
-							id="aliasdb" placeholder="Surnom ?" class="form-control" /> <input
+							id="aliasdb" placeholder="Surnom ?" class="form-control"/> <input
 							type="text" name="email" id="emaildb" placeholder="Email ?"
 							class="form-control" /> <input type="password" name="user"
 							id="passwddb" placeholder="Mot de passe ?" class="form-control" />
@@ -53,8 +53,9 @@
 					<div class="btn-group" role="group">
 						<button type="button" id="post-bdd1" class="btn btn-primary">Enregistrer</button>
 					</div>
+					<div id="erreurdiv1" style="color : red"></div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" id="identifier">
 					<div class="form-group">
 						<h2>S'identifier :</h2>
 						<input type="text" name="userlogin" id="userlogin"
@@ -65,6 +66,7 @@
 					<div class="btn-group" role="group">
 						<button type="button" id="post-bdd2" class="btn btn-primary">Connexion</button>
 					</div>
+					<div id="erreurdiv2" style="color : red"></div>
 				</div>
 			</div>
 			<div class="row"></div>

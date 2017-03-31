@@ -4,18 +4,32 @@ $(document).ready(function() {
 	$("#post-ram").click(function () {postUser($('#user').val())});
 	$("#list-ram").click(function () {listUsers()});
 	$("#get-bdd").click(function () {getUserBdd($('#userdb').val())});
-	$("#post-bdd1").click(function () {postUserBdd(
-			$('#userdb').val(),
-			$('#aliasdb').val(),
-			$('#emaildb').val(),
-			$('#passwddb').val())});
+	$("#post-bdd1").click(function () {
+		erreur = getError1($('#userdb').val(), $('#emaildb').val(), $('#passwddb').val());
+		if(erreur !=''){
+			$("#erreurdiv1").html(erreur);
+		}
+		else{
+			postUserBdd(
+					$('#userdb').val(),
+					$('#aliasdb').val(),
+					$('#emaildb').val(),
+					$('#passwddb').val())
+		}
+	});
+
 	$("#post-bdd2").click(function (){
-		
-		CacheConnInscr()
-		getUserBdd($('#userlogin').val())
-		EnvoiPageUtilisateur()
-		getOffre(1)
-		getOffres()
+		erreur2 = getError2($('#userlogin').val(), $('#passwdlogin').val());
+		if(erreur2 !=''){
+			$("#erreurdiv2").html(erreur2);
+		}
+		else{
+			CacheConnInscr()
+			getUserBdd($('#userlogin').val())
+			EnvoiPageUtilisateur()
+			getOffre(1)
+			getOffres()
+		}
 	});
 	$("#list-bdd").click(function () {listUsersBdd()});
 	$("#read-forall").click(function () {getForAll()});
@@ -46,12 +60,35 @@ function progress(e) {
 
 }
 
-function alertChampVide(){
-	alert("champ vide");
+
+function getError1(name,email,pwd){
+	let erreur = '';
+	if (name== "")
+		erreur += "<p>vous devez ajouter un nom </p>" ;		
+	if (email== "" || !validateEmail(email))
+		erreur += "<p>vous devez ajouter un email valide</p>" ;		
+	if (pwd== "")
+		erreur += "<p>vous devez ajouter un un mot de passe </p>" ;
+	return erreur ; 
+}
+
+function getError2(name,pwd){
+	let erreur = '';
+	if (name== "")
+		erreur += "<p>vous devez ajouter un nom </p>" ;			
+	if (pwd== "")
+		erreur += "<p>vous devez ajouter un un mot de passe </p>" ;
+	return erreur ; 
 }
 
 
-//--------------------------------------------getoffres------------------------------
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+
+// --------------------------------------------getoffres------------------------------
 
 function getOffres()
 {
@@ -92,11 +129,10 @@ function getOffre(id)
 }
 
 function getAllOffres(data, select){
-	alert("avant for" + data.length);
 	var i;
 	for (i=0;i<data.length;i++) {
 		console.log("dans for" + data[i].titre);
-		alert("dans for" + data[i].titre);
+		// alert("dans for" + data[i].titre);
 		addOffreVisual(data[i], select);
 
 	}
@@ -116,7 +152,7 @@ function getByAnnotation() {
 }
 
 
-//--------------------------------------------getutilisateurs--------------------------
+// --------------------------------------------getutilisateurs--------------------------
 
 function getSecure(url) {
 	if($("#userlogin").val() != "") {
@@ -156,12 +192,13 @@ function getUserGeneric(name, url) {
 
 function afficheUser(data) {
 	console.log(data);
-	//$("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name + ")");
-	//alert(data.id +""+ data.alias +""+ data.name+"");
+	// $("#reponse").html(data.id + " : <b>" + data.alias + "</b> (" + data.name
+	// + ")");
+	// alert(data.id +""+ data.alias +""+ data.name+"");
 	$(".label-primary").html("vous êtes connecté : " + data.alias);
 }
 
-//-------------------------------------------getliste-utilisateur---------------------------------
+// -------------------------------------------getliste-utilisateur---------------------------------
 
 
 function listUsersBdd() {
@@ -185,19 +222,11 @@ function afficheListUsers(data) {
 }
 
 
-//-------------------------------------------post-utilisateur---------------------------------
+// -------------------------------------------post-utilisateur---------------------------------
 function postUserBdd(name, alias, email, pwd) {
+	postUserGeneric(name, alias, email, pwd, "v1/user/");
+	return EnvoiPageUtilisateur();
 	
-	if (name == "" || pwd == "" || email == "")
-	{
-	     alert('Remplissez tous les champs');
-	     return false ;
-	}
-	else if (name != "" && pwd != "" && email !="")
-	{
-	    postUserGeneric(name, alias, email, pwd, "v1/user/");
-		return EnvoiPageUtilisateur();
-	}
 }
 
 function postUserGeneric(name, alias, email, pwd, url) {
@@ -222,7 +251,7 @@ function postUserGeneric(name, alias, email, pwd, url) {
 		}
 	});
 }
-//--------------------------------------------postoffres------------------------------
+// --------------------------------------------postoffres------------------------------
 
 
 function postAnnonce(){
