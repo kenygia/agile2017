@@ -102,7 +102,6 @@ function getOffre(id)
 function getAllOffres(data, select){
 	var i;
 	for (i=0;i<data.length;i++) {
-		console.log("dans for" + data[i].titre);
 		addOffreVisual(data[i], select);
 
 	}
