@@ -11,6 +11,7 @@ public class OfferDto {
 	private int id_user;
 	private String titre;
 	private String detail;
+	private boolean active;
 
 	public int getId() {
 		return id;
@@ -42,6 +43,14 @@ public class OfferDto {
 
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

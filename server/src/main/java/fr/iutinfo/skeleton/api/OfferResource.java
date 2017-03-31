@@ -86,6 +86,15 @@ public class OfferResource {
 		offers = dao.all();
 		return offers.stream().map(Offer::convertToDto).collect(Collectors.toList());
 	}
+	
+	@GET
+	@Path("/active")
+	public List<OfferDto> getActiveOffers() {
+		List<Offer> offers;
+		logger.debug("get all active offers");
+		offers = dao.active();
+		return offers.stream().map(Offer::convertToDto).collect(Collectors.toList());
+	}
 
 	@DELETE
 	@Path("/{id}")

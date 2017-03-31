@@ -7,10 +7,10 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import java.util.List;
 
 public interface OfferDAO {
-	@SqlUpdate("create table offers (id integer primary key autoincrement, id_user integer, titre varchar(255), detail varchar(1000))")
+	@SqlUpdate("create table offers (id integer primary key autoincrement, id_user integer, titre varchar(255), detail varchar(1000), active boolean)")
 	void createOfferTable();
 
-	@SqlUpdate("insert into offers (id_user,titre, detail) values (:id_user, :titre, :detail)")
+	@SqlUpdate("insert into offers (id_user,titre, detail, active) values (:id_user, :titre, :detail, :active)")
 	@GetGeneratedKeys
 	int insert(@BindBean() Offer offer);
 
